@@ -25,17 +25,14 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpGet, Authorize]
-        public ActionResult<object> GetMe()
-        {
-            var userName = _userService.GetMyName();
-            return Ok(userName);
-        }
-
         [HttpPost("register")]
         public async Task<ActionResult<User>> Registor(UserDto request)
         {
             var result = await _userService.Registor(request);
+            if(result is  null)
+            {
+                return BadRequest("Username already taken");
+            }
             return Ok(result);
         }
 
@@ -53,6 +50,7 @@ namespace API.Controllers
             {
                 return BadRequest("Wrong password");
             }
+
             var newRefreshToken = _userService.GenerateRefreshToken();
             var cookieOptions = new CookieOptions
             {
@@ -60,7 +58,8 @@ namespace API.Controllers
                 Expires = newRefreshToken.Expires,
             };
             Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-            _userService.SetRefreshToken(newRefreshToken);
+            await _userService.SetRefreshToken(newRefreshToken);
+
             return Ok(result);
         }
 
@@ -68,7 +67,7 @@ namespace API.Controllers
         public async Task<ActionResult<string>> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
-            var result =  _userService.RefreshToken(refreshToken);
+            var result =  await _userService.RefreshToken(refreshToken);
             if (result is "irt")
             {
                 return Unauthorized("Invalid refresh token");
@@ -86,18 +85,24 @@ namespace API.Controllers
                 Expires = newRefreshToken.Expires,
             };
             Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-            _userService.SetRefreshToken(newRefreshToken);
+            await _userService.SetRefreshToken(newRefreshToken);
             return Ok(result);
+        }
+        [HttpGet, Authorize]
+        public ActionResult<object> GetMe()
+        {
+            var userName = _userService.GetMyName();
+            return Ok(userName);
         }
 
 
-        
 
-        
 
-        
 
-        
+
+
+
+
 
 
     }

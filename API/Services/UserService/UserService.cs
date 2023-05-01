@@ -1,11 +1,14 @@
 ﻿using API.Controllers;
 using API.Models;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
 
 namespace API.Services.UserService
 {
@@ -21,7 +24,7 @@ namespace API.Services.UserService
             _httpContextAccessor = httpContextAccessor;
             _context = context;
         }
-        public static User user = new User();
+        public static User staticUser = new User();
         
 
 
@@ -37,14 +40,20 @@ namespace API.Services.UserService
 
         public async Task<User> Registor(UserDto request)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == request.Username);
+            if (user.Username == request.Username){
+                return null;
+            }
 
-            user.Username = request.Username;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-            _context.Users.Add(user);
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            User newUser = new User();
+            newUser.Username = request.Username;
+            newUser.PasswordHash = passwordHash;
+            newUser.PasswordSalt = passwordSalt;
+            newUser.Role = "user";
+            _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            return user;
+            return newUser;
         }
 
         public async Task<string> Login(UserDto request)
@@ -59,16 +68,15 @@ namespace API.Services.UserService
             {
                 return "wp";
             }
-
-            user.RefreshToken = "asd";
-            await _context.SaveChangesAsync();
-
+            
+            staticUser.Username = user.Username;
             string token = CreateToken(user);
             return token;
         }
 
-        public string RefreshToken(string refreshToken)
+        public async Task<string> RefreshToken(string refreshToken)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == staticUser.Username);
             if (!user.RefreshToken.Equals(refreshToken))
             {
                 return "irt";
@@ -102,12 +110,13 @@ namespace API.Services.UserService
             return refreshToken;
         }
 
-        public async void SetRefreshToken(RefreshToken newRefreshToken)
+        public async Task SetRefreshToken(RefreshToken newRefreshToken)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == staticUser.Username);
             user.RefreshToken = newRefreshToken.Token;
             user.TokenCreated = newRefreshToken.Created;
             user.TokenExpires = newRefreshToken.Expires;
-            //await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
@@ -122,7 +131,7 @@ namespace API.Services.UserService
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
@@ -137,6 +146,46 @@ namespace API.Services.UserService
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
         }
+        #region UserController
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            var user = await _context.Users.ToListAsync();
+            return user;
+        }
+        public async Task<User> GetSingleUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user is null)
+                return null;
+            return user;
+        }
+        public async Task<List<User>> UpdateUser(int id, UserDto request)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user is null)
+                return null;
+            user.Username = request.Username;
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
+
+            await _context.SaveChangesAsync();
+            return await _context.Users.ToListAsync();
+
+        }
+        public async Task<List<User>> DeleteUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user is null)
+                return null;
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return await _context.Users.ToListAsync();
+        }
+
+
+        #endregion
 
     }
 }

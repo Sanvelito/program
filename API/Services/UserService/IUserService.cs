@@ -5,8 +5,13 @@
         string GetMyName();
         Task<User> Registor(UserDto request);
         Task<string> Login(UserDto request);
-        string RefreshToken(string refreshToken);
+        Task<string> RefreshToken(string refreshToken);
         RefreshToken GenerateRefreshToken();
-        void SetRefreshToken(RefreshToken newRefreshToken);
+        Task SetRefreshToken(RefreshToken newRefreshToken);
+
+        Task<List<User>> GetAllUsers();
+        Task<User> GetSingleUser(int id);
+        Task<List<User>> UpdateUser(int id,UserDto user);
+        Task<List<User>> DeleteUser(int id);
     }
 }
