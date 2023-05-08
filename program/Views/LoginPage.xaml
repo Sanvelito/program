@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="program.View.LoginPage"
+             BackgroundColor="White"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             Title="LoginPage">
+    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+        <Entry Placeholder="Username" Text="{Binding Username}">
+            
+        </Entry>
+        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}">
+
+        </Entry>
+        <Button Text="Login" Background="black" TextColor="White" Command="{Binding LoginCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

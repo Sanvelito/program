@@ -28,7 +28,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<User>> Registor(UserDto request)
         {
-            var result = await _userService.Registor(request);
+            var result = await _userService.Register(request);
             if(result is  null)
             {
                 return BadRequest("Username already taken");
@@ -38,36 +38,26 @@ namespace API.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<LoginDto>> Login(UserDto request)
         {
             var result = await _userService.Login(request);
-            if(result is "unf")
+            if(result.status is "unf")
             {
                 return BadRequest("User not found");
             }
 
-            if(result is "wp")
+            if(result.status is "wp")
             {
                 return BadRequest("Wrong password");
             }
-
-            var newRefreshToken = _userService.GenerateRefreshToken();
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = newRefreshToken.Expires,
-            };
-            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-            await _userService.SetRefreshToken(newRefreshToken);
 
             return Ok(result);
         }
 
         [HttpPost("refresh-token")]
-        public async Task<ActionResult<string>> RefreshToken()
+        public async Task<ActionResult<string>> RefreshToken(string accessToken,string refreshToken)
         {
-            var refreshToken = Request.Cookies["refreshToken"];
-            var result =  await _userService.RefreshToken(refreshToken);
+            var result =  await _userService.RefreshToken(accessToken, refreshToken);
             if (result is "irt")
             {
                 return Unauthorized("Invalid refresh token");
@@ -77,15 +67,6 @@ namespace API.Controllers
                 return Unauthorized("Token Expired");
             }
 
-            
-            var newRefreshToken = _userService.GenerateRefreshToken();
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = newRefreshToken.Expires,
-            };
-            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
-            await _userService.SetRefreshToken(newRefreshToken);
             return Ok(result);
         }
         [HttpGet, Authorize]
@@ -94,16 +75,5 @@ namespace API.Controllers
             var userName = _userService.GetMyName();
             return Ok(userName);
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 }

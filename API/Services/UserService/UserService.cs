@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Primitives;
 
 namespace API.Services.UserService
 {
@@ -37,13 +38,15 @@ namespace API.Services.UserService
             }
             return result;
         }
-
-        public async Task<User> Registor(UserDto request)
+        
+        public async Task<User> Register(UserDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == request.Username);
-            if (user.Username == request.Username){
+            if(user != null && user.Username == request.Username)
+            {
                 return null;
             }
+            
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             User newUser = new User();
@@ -51,32 +54,40 @@ namespace API.Services.UserService
             newUser.PasswordHash = passwordHash;
             newUser.PasswordSalt = passwordSalt;
             newUser.Role = "user";
+            
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
             return newUser;
         }
 
-        public async Task<string> Login(UserDto request)
+        public async Task<LoginDto> Login(UserDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == request.Username);
             if (user is null)
             {
-                return "unf";
+                return new LoginDto {status = "unf"};
             }
 
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
-                return "wp";
+                return new LoginDto { status = "wp" };
             }
-            
-            staticUser.Username = user.Username;
-            string token = CreateToken(user);
-            return token;
+
+            string accessToken = CreateToken(user);
+            var newToken = GenerateRefreshToken();
+            string refreshToken = newToken.Token;
+
+            await SetRefreshToken(request.Username,newToken);
+
+            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, status = "success" };
         }
 
-        public async Task<string> RefreshToken(string refreshToken)
+        public async Task<string> RefreshToken(string accessToken, string refreshToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == staticUser.Username);
+            var jwt = new JwtSecurityToken(accessToken);
+            string userName = jwt.Claims.First(c => c.Type == "name").Value;
+
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == userName);
             if (!user.RefreshToken.Equals(refreshToken))
             {
                 return "irt";
@@ -87,6 +98,8 @@ namespace API.Services.UserService
             }
 
             string token = CreateToken(user);
+            var newRefreshToken = GenerateRefreshToken();
+            await SetRefreshToken(userName,newRefreshToken);
 
             return token;
         }
@@ -110,9 +123,9 @@ namespace API.Services.UserService
             return refreshToken;
         }
 
-        public async Task SetRefreshToken(RefreshToken newRefreshToken)
+        public async Task SetRefreshToken(string username,RefreshToken newRefreshToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == staticUser.Username);
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == username);
             user.RefreshToken = newRefreshToken.Token;
             user.TokenCreated = newRefreshToken.Created;
             user.TokenExpires = newRefreshToken.Expires;
@@ -169,6 +182,7 @@ namespace API.Services.UserService
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordSalt = passwordSalt;
             user.PasswordHash = passwordHash;
+            user.Role = "user";
 
             await _context.SaveChangesAsync();
             return await _context.Users.ToListAsync();

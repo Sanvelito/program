@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# MVVMTK0008: Unsupported C# language version
+dotnet_diagnostic.MVVMTK0008.severity = error

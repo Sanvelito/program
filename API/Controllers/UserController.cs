@@ -16,13 +16,13 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpGet("Get-all-users"), Authorize(Roles = "Admin")]
+        [HttpGet("Get-all-users"), Authorize(Roles = "admin")]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
             return await _userService.GetAllUsers();
         }
 
-        [HttpGet("{id}"), Authorize(Roles = "Admin")]
+        [HttpGet("{id}"), Authorize(Roles = "admin")]
         public async Task<ActionResult<User>> GetSingleUser(int id)
         {
             var result = await _userService.GetSingleUser(id);
@@ -32,7 +32,7 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}"), Authorize(Roles = "Admin")]
+        [HttpPut("{id}"), Authorize(Roles = "admin")]
         public async Task<ActionResult<List<User>>> UpdateUser(int id, UserDto request)
         {
             var result = await _userService.UpdateUser(id, request);
@@ -42,7 +42,7 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+        [HttpDelete("{id}"), Authorize(Roles = "admin")]
         public async Task<ActionResult<List<User>>> DeleteUser(int id)
         {
             var result = await _userService.DeleteUser(id);

@@ -20,5 +20,11 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
+    private void CheckInternet(object sender, EventArgs e)
+	{
+		var hasInternet = Connectivity.Current.NetworkAccess == NetworkAccess.Internet;
+
+		DisplayAlert("Has internet?", $"{hasInternet}", "OK");
+	}
 }
 

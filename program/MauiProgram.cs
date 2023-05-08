@@ -1,4 +1,7 @@
-﻿namespace program;
+﻿using program.ViewModel;
+using Refit;
+
+namespace program;
 
 public static class MauiProgram
 {
@@ -12,7 +15,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+		builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 
-		return builder.Build();
+        builder.Services.AddSingleton<LoginViewModel>();
+		
+        var app = builder.Build();
+		return app;
 	}
 }

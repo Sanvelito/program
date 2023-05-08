@@ -34,6 +34,10 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
+            <Button
+                Text="Check Internet"
+                Clicked="CheckInternet"
+                HorizontalOptions="Center" />
 
         </VerticalStackLayout>
     </ScrollView>
