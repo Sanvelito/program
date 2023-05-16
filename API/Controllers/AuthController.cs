@@ -26,7 +26,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Registor(UserDto request)
+        public async Task<ActionResult<User>> Register(RegisterDto request)
         {
             var result = await _userService.Register(request);
             if(result is  null)
@@ -55,7 +55,7 @@ namespace API.Controllers
         }
 
         [HttpPost("refresh-token")]
-        public async Task<ActionResult<string>> RefreshToken(string accessToken,string refreshToken)
+        public async Task<ActionResult<string>> RefreshToken(string accessToken, string refreshToken)
         {
             var result =  await _userService.RefreshToken(accessToken, refreshToken);
             if (result is "irt")
@@ -69,6 +69,14 @@ namespace API.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("check-auth")]
+        public async Task<ActionResult<LoginDto>> CheckAuth(string request)
+        {
+            var result = await _userService.CheckAuth(request);
+            return Ok(result);
+        }
+
         [HttpGet, Authorize]
         public ActionResult<object> GetMe()
         {

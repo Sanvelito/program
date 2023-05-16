@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-
+using API.Services.CompanyService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICompanyService, CompService>();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddHttpContextAccessor();
 

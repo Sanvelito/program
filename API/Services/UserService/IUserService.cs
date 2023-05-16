@@ -3,9 +3,10 @@
     public interface IUserService
     {
         string GetMyName();
-        Task<User> Register(UserDto request);
+        Task<User> Register(RegisterDto request);
         Task<LoginDto> Login(UserDto request);
-        Task<string> RefreshToken(string accessToken,string refreshToken);
+        Task<string> RefreshToken(string accessToken, string refreshToken);
+        Task<LoginDto> CheckAuth(string refreshTokenInSecure);
 
 
         Task<List<User>> GetAllUsers();

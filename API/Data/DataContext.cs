@@ -15,5 +15,10 @@ namespace API.Data
             optionsBuilder.UseSqlServer("Server=.;Database=programdb;Trusted_Connection=true;TrustServerCertificate=true;");
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<CustomerService> CustomerServices { get; set; }
+        public DbSet<CompanyService> CompanyServices { get; set; }
+
     }
 }

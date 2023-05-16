@@ -1,7 +1,7 @@
 using program.Helpers;
-using program.ViewModel;
+using program.ViewModels;
 
-namespace program.View;
+namespace program.Views;
 
 public partial class LoginPage : ContentPage
 {
@@ -10,4 +10,9 @@ public partial class LoginPage : ContentPage
 		InitializeComponent();
 		BindingContext = ServiceHelper.GetService<LoginViewModel>();
 	}
+    protected override bool OnBackButtonPressed()
+    {
+        Application.Current.Quit();
+        return true;
+    }
 }

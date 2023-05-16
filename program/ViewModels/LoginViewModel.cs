@@ -1,20 +1,22 @@
-﻿using program.Model;
+﻿using program.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Refit;
 using program.Services;
 using System.Net.Security;
 using System.Net.Http;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using program.Models;
+using System.IdentityModel.Tokens.Jwt;
+using program.Views;
+using program.Views.User;
 
-namespace program.ViewModel
+namespace program.ViewModels
 {
     //[INotifyPropertyChanged]
     public partial class LoginViewModel : ObservableObject
@@ -27,32 +29,18 @@ namespace program.ViewModel
         [ObservableProperty]
         string username;
 
-        
-
-
         IConnectivity connectivity;
-        public ICommand LoginCommand { get; }
         public LoginViewModel(IConnectivity connectivity)
         {
             
             this.connectivity = connectivity;
 
-            //var handler = new HttpClientHandler();
-            //handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-
-            //_ApiService = RestService.For<IApiService>(
-            //    new HttpClient(handler)
-            //    {
-            //        BaseAddress = new Uri("https://10.0.2.2:7108")
-            //    }
-            //);
             // Инициализация Refit для работы с API
             _ApiService = RestService.For<IApiService>("http://10.0.2.2:5269");
 
-            LoginCommand = new Command(async () => await LoginAsync());
         }
 
-        //[ICommand]
+        [RelayCommand]
         public async Task<bool> LoginAsync()
         {
             try
@@ -65,11 +53,21 @@ namespace program.ViewModel
                 });
 
                 // Сохранение токена в безопасном хранилище
+                await SecureStorage.SetAsync("access_token", response.accessToken);
+                await SecureStorage.SetAsync("refresh_token", response.refreshToken);
+                await SecureStorage.SetAsync("hasAuth", "true");
 
-                SecureStorage.SetAsync("access_token", response.accessToken);
-                SecureStorage.SetAsync("refresh_token", response.refreshToken);
+
                 await App.Current.MainPage.DisplayAlert("Alert", $"{response.status}", "OK");
+                if(response.role == "admin")
+                {
+                    await Shell.Current.GoToAsync($"///{nameof(AdminPage)}");
 
+                }
+                if (response.role == "user")
+                {
+                    await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+                }
 
                 return true;
             }
@@ -81,5 +79,8 @@ namespace program.ViewModel
                 return false;
             }
         }
+        [RelayCommand]
+        Task Navigate() => Shell.Current.GoToAsync(nameof(RegistrationPage));
+
     }
 }

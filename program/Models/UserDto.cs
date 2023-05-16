@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace program.Model
+namespace program.Models
 {
     public class UserDto
     {

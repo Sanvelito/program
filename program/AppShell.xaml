@@ -4,19 +4,62 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:program"
-    xmlns:mylogin="clr-namespace:program.View"
+    xmlns:views="clr-namespace:program.Views"
+    xmlns:viewsUser="clr-namespace:program.Views.User"
     Shell.FlyoutBehavior="Disabled">
-
-
-
-    <FlyoutItem Route="Login" x:Name="MyLoginPage">
-        <ShellContent ContentTemplate="{DataTemplate mylogin:LoginPage}"/>
-    </FlyoutItem>
-
-
-
-    <ShellContent x:Name="MyHomePage"
+    
+    <!--Loading Page-->
+    <ShellContent
             Title="Home"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate views:LoadingPage}"
+            Route="LoadingPage" />
+    
+    <!--Login Page-->
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"/>
+    
+    <!--Main Page-->
+    <TabBar>
+        <Tab Title="Admin">
+            <ShellContent
+            Title="Admin"
+            ContentTemplate="{DataTemplate views:AdminPage}"
+            Route="AdminPage" />
+        </Tab>
+        <Tab Title="User">
+            <ShellContent
+            Title="User"
+            ContentTemplate="{DataTemplate views:UserPage}"
+            Route="UserPage" />
+        </Tab>
+    </TabBar>
+    <!--User Page-->
+    <TabBar>
+        <Tab Title="Main">
+            <ShellContent
+            Title="Main"
+            ContentTemplate="{DataTemplate viewsUser:MainPage}"
             Route="MainPage" />
+        </Tab>
+        <Tab Title="Catalog">
+            <ShellContent
+            Title="UserCatalog"
+            ContentTemplate="{DataTemplate viewsUser:UserCatalogPage}"
+            Route="UserCatalogPage" />
+        </Tab>
+        <Tab Title="Chat">
+            <ShellContent
+            Title="UserChat"
+            ContentTemplate="{DataTemplate viewsUser:UserChatPage}"
+            Route="UserChatPage" />
+        </Tab>
+        <Tab Title="Account">
+            <ShellContent
+            Title="UserAccount"
+            ContentTemplate="{DataTemplate viewsUser:UserAccountPage}"
+            Route="UserAccountPage" />
+        </Tab>
+    </TabBar>
 </Shell>

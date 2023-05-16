@@ -25,7 +25,6 @@ namespace API.Services.UserService
             _httpContextAccessor = httpContextAccessor;
             _context = context;
         }
-        public static User staticUser = new User();
         
 
 
@@ -39,20 +38,23 @@ namespace API.Services.UserService
             return result;
         }
         
-        public async Task<User> Register(UserDto request)
+        public async Task<User> Register(RegisterDto request)
         {
             var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == request.Username);
             if(user != null && user.Username == request.Username)
             {
                 return null;
             }
-            
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
             User newUser = new User();
             newUser.Username = request.Username;
             newUser.PasswordHash = passwordHash;
             newUser.PasswordSalt = passwordSalt;
+            newUser.FirstName = request.FirstName;
+            newUser.LastName = request.LastName;
+            newUser.PhoneNumber = request.PhoneNumber;
             newUser.Role = "user";
             
             _context.Users.Add(newUser);
@@ -79,7 +81,7 @@ namespace API.Services.UserService
 
             await SetRefreshToken(request.Username,newToken);
 
-            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, status = "success" };
+            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role, status = "success" };
         }
 
         public async Task<string> RefreshToken(string accessToken, string refreshToken)
@@ -104,6 +106,26 @@ namespace API.Services.UserService
             return token;
         }
 
+        public async Task<LoginDto> CheckAuth(string refreshTokenInSecure)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.RefreshToken == refreshTokenInSecure);
+            if (user is null)
+            {
+                return new LoginDto { status = "notAuth" };
+            }
+            if (user.TokenExpires < DateTime.Now)
+            {
+                return new LoginDto { status = "notAuth" };
+            }
+
+            string accessToken = CreateToken(user);
+            var newRefreshToken = GenerateRefreshToken();
+            string refreshToken = newRefreshToken.Token;
+            await SetRefreshToken(user.Username, newRefreshToken);
+
+            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role, status = "Auth" };
+        }
+
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
@@ -120,6 +142,7 @@ namespace API.Services.UserService
                 Expires = DateTime.Now.AddDays(7),
                 Created = DateTime.Now
             };
+
             return refreshToken;
         }
 
@@ -153,7 +176,7 @@ namespace API.Services.UserService
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddMinutes(10),
                 signingCredentials: creds);
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
