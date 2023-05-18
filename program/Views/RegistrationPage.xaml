@@ -2,15 +2,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="program.Views.RegistrationPage"
-             Title="RegistrationPage">
-    <VerticalStackLayout>
-        
+             Title="Регистрация">
+
+
+    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout Padding="10">
+            <Label FontFamily="Consolas" Text="Username"/>
+            <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
+                <VerticalStackLayout>
+
+                    <Entry x:Name="Username" Text="{Binding Username}" Margin="5,0,0,0" Placeholder="Логин" FontSize="18">
+                    </Entry>
+
+                </VerticalStackLayout>
+            </Frame>
+            <VerticalStackLayout Padding="0" Margin="0,5,0,0">
+                <Label FontFamily="Consolas" Text="Password"/>
+                <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
+                    <Entry x:Name="Password" Text="{Binding Password}" Margin="5,0,0,0" Placeholder="Пароль"
+                                   IsPassword="True" FontSize="18">
+                        <Entry.Behaviors>
+
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0" Margin="0,5,0,0">
+                <Label FontFamily="Consolas" Text="FirstName"/>
+                <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
+                    <Entry x:Name="FirstName" Text="{Binding FirstName}" Margin="5,0,0,0" Placeholder="Имя" FontSize="18">
+                        <Entry.Behaviors>
+
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0" Margin="0,5,0,0">
+                <Label FontFamily="Consolas" Text="LastName"/>
+                <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
+                    <Entry x:Name="LastName" Text="{Binding LastName}" Margin="5,0,0,0" Placeholder="Фамилия" FontSize="18">
+                        <Entry.Behaviors>
+
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0" Margin="0,5,0,0">
+                <Label FontFamily="Consolas" Text="PhoneNumber"/>
+                <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
+                    <Entry x:Name="PhoneNumber" Text="{Binding PhoneNumber}" Margin="5,0,0,0" Placeholder="PhoneNumber" FontSize="18">
+                        <Entry.Behaviors>
+
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </VerticalStackLayout>
+            <BoxView Color="Black"
+                                 Margin="0,20,0,0"
+                                 HeightRequest="2"
+                                 HorizontalOptions="Fill" />
+
+            <Button Margin="0,20,0,0"
+                                x:Name="LoginButton"
+                                Command="{Binding RegisterCommand}"
+                                Text="Регистрация" VerticalOptions="CenterAndExpand" 
+                                HorizontalOptions="FillAndExpand"/>
+
+        </VerticalStackLayout>
+        <!--<VerticalStackLayout>
+
         <Entry Placeholder="Username" Text="{Binding Username}"/>
         <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
         <Entry Placeholder="FirstName" Text="{Binding FirstName}"/>
         <Entry Placeholder="LastName" Text="{Binding LastName}"/>
         <Entry Placeholder="PhoneNumber" Text="{Binding PhoneNumber}"/>
 
-        <Button Text="Register" Command="{Binding RegisterCommand}"/>
+        <Button Text="Register" Command="{Binding RegisterCommand}"/>-->
     </VerticalStackLayout>
 </ContentPage>

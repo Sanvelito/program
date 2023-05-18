@@ -1,8 +1,8 @@
-﻿namespace API.Models
+﻿namespace API.Models.Dto
 {
-    public class CompanyDto
+    public class CompanyServiceGroupDto
     {
-        public string CompanyName { get; set; }
+        public string Name { get; set; }
         public List<CompanyServiceDto> Services { get; set; } = new List<CompanyServiceDto>();
     }
 }

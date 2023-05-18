@@ -1,5 +1,4 @@
 ﻿using API.Controllers;
-using API.Models;
 using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +9,7 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Primitives;
+using API.Models.Dto;
 
 namespace API.Services.UserService
 {

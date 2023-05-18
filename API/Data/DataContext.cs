@@ -16,9 +16,10 @@ namespace API.Data
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<Service> Services { get; set; }
         public DbSet<CustomerService> CustomerServices { get; set; }
         public DbSet<CompanyService> CompanyServices { get; set; }
+        public DbSet<ServiceGroup> ServiceGroups { get; set; }
+        public DbSet<Service> Services { get; set; }
 
     }
 }

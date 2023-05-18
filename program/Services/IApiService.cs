@@ -19,6 +19,7 @@ namespace program.Services
         [Post("/api/Auth/register")]
         Task<RegisterDto> Register([Body] RegisterDto request);
 
-
+        [Get("/api/Company")]
+        Task<List<CompanyDto>> GetAllCompanies();
     }
 }

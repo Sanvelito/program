@@ -1,4 +1,6 @@
-﻿namespace API.Services.UserService
+﻿using API.Models.Dto;
+
+namespace API.Services.UserService
 {
     public interface IUserService
     {

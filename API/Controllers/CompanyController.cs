@@ -1,4 +1,5 @@
-﻿using API.Services.CompanyService;
+﻿using API.Models.Dto;
+using API.Services.CompanyService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,17 +23,12 @@ namespace API.Controllers
             var result = await _CompanyService.GetCompany(id);
             return Ok(result);
         }
-        //[HttpPut("{id}")]
-        //public async Task<ActionResult<CompanyDto>> PutCompany(int id)
-        //{
-        //    var result = await _CompanyService.GetCompany(id);
-        //    return Ok(result);
-        //}
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<CompanyDto>> DeleteCompany(int id)
-        //{
-        //    var result = await _CompanyService.GetCompany(id);
-        //    return Ok(result);
-        //}
+
+        [HttpGet]
+        public async Task<ActionResult<CompanyDto>> GetAllCompanies()
+        {
+            var result = await _CompanyService.GetAllCompanies();
+            return Ok(result);
+        }
     }
 }

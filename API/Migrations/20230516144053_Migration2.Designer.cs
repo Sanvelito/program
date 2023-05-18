@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230516144053_Migration2")]
+    partial class Migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,12 +56,17 @@ namespace API.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int>("ServiceGroupId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("ServiceGroupId");
 
                     b.HasIndex("ServiceId");
 
@@ -104,12 +112,7 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceGroupId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ServiceGroupId");
 
                     b.ToTable("Services");
                 });
@@ -128,7 +131,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ServiceGroups");
+                    b.ToTable("ServicesGroup");
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -189,6 +192,12 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Models.ServiceGroup", "ServiceGroup")
+                        .WithMany()
+                        .HasForeignKey("ServiceGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("API.Models.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
@@ -198,6 +207,8 @@ namespace API.Migrations
                     b.Navigation("Company");
 
                     b.Navigation("Service");
+
+                    b.Navigation("ServiceGroup");
                 });
 
             modelBuilder.Entity("API.Models.CustomerService", b =>
@@ -217,17 +228,6 @@ namespace API.Migrations
                     b.Navigation("CompanyService");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("API.Models.Service", b =>
-                {
-                    b.HasOne("API.Models.ServiceGroup", "ServiceGroup")
-                        .WithMany()
-                        .HasForeignKey("ServiceGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ServiceGroup");
                 });
 #pragma warning restore 612, 618
         }
