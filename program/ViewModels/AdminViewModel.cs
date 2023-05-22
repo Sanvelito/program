@@ -11,11 +11,10 @@ namespace program.ViewModels
 {
     public partial class AdminViewModel : ObservableObject
     {
-        IConnectivity connectivity;
-        public AdminViewModel(IConnectivity connectivity)
+        public AdminViewModel()
         {
-            this.connectivity = connectivity;
         }
+
         [RelayCommand]
         Task Back() => Shell.Current.GoToAsync("..");
         [RelayCommand]

@@ -5,7 +5,7 @@
              Title="UserCatalogPage">
     <VerticalStackLayout>
         <ListView ItemsSource="{Binding Companies}"
-                  SeparatorColor="Red"
+                  SeparatorColor="White"
                   
                   ItemSelected="ListView_ItemSelected"
                   SeparatorVisibility="None"

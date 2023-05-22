@@ -13,12 +13,9 @@ namespace program.ViewModels
     public partial class LoadingViewModel
     {
         private readonly IApiService _ApiService;
-        IConnectivity connectivity;
-        public LoadingViewModel(IConnectivity connectivity)
+        public LoadingViewModel(IApiService apiService)
         {
-            this.connectivity = connectivity;
-
-            _ApiService = RestService.For<IApiService>("http://10.0.2.2:5269");
+            _ApiService = apiService;
         }
         
         public async Task<LoginDto> isAuthenticatedAsync()

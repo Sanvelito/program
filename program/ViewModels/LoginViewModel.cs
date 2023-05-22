@@ -29,14 +29,11 @@ namespace program.ViewModels
         [ObservableProperty]
         string username;
 
-        IConnectivity connectivity;
-        public LoginViewModel(IConnectivity connectivity)
+        public LoginViewModel(IApiService apiService)
         {
-            
-            this.connectivity = connectivity;
 
             // Инициализация Refit для работы с API
-            _ApiService = RestService.For<IApiService>("http://10.0.2.2:5269");
+            _ApiService = apiService;
 
         }
 
@@ -45,6 +42,11 @@ namespace program.ViewModels
         {
             try
             {
+                if (Username == null || Password == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", "Введите Логин и Пароль", "OK");
+                    return false;
+                }
                 // Отправка запроса на сервер для получения токена
                 LoginDto response = await _ApiService.Login(new UserDto
                 {
@@ -58,7 +60,7 @@ namespace program.ViewModels
                 await SecureStorage.SetAsync("hasAuth", "true");
 
 
-                await App.Current.MainPage.DisplayAlert("Alert", $"{response.status}", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", "Вход", "OK");
                 if(response.role == "admin")
                 {
                     await Shell.Current.GoToAsync($"///{nameof(AdminPage)}");
@@ -68,12 +70,14 @@ namespace program.ViewModels
                 {
                     await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
                 }
-
+                Password = string.Empty;
+                Username = string.Empty;
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Упс!", "Логин или Пароль не верны", "OK");
+                //await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
                 return false;

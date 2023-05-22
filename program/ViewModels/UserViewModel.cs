@@ -9,11 +9,8 @@ namespace program.ViewModels
 {
     public partial class UserViewModel : ObservableObject
     {
-        IConnectivity connectivity;
-
-        public UserViewModel(IConnectivity connectivity)
+        public UserViewModel()
         {
-            this.connectivity = connectivity;
         }
     }
 }

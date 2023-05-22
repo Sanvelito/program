@@ -1,14 +1,12 @@
-﻿namespace API.Models
+﻿namespace API.Models.Dto
 {
-    public class CustomerService
+    public class CustomerServiceDto
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public string Username { get; set; }
         public string CompanyName { get; set; }
-        public CompanyService CompanyService { get; set; }
-        public int UserId { get; set; }
-        public int CompanyServiceId { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string ServiceName { get; set; }
         public DateTime DeadLine { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }

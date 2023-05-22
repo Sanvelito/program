@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Android.Net;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.IdentityModel.Tokens;
 using program.Models;
@@ -31,14 +32,10 @@ namespace program.ViewModels
         [ObservableProperty]
         int phoneNumber;
 
-        IConnectivity connectivity;
-        public RegistrationViewModel(IConnectivity connectivity)
+        public RegistrationViewModel(IApiService apiService)
         {
-
-            this.connectivity = connectivity;
-
             // Инициализация Refit для работы с API
-            _ApiService = RestService.For<IApiService>("http://10.0.2.2:5269");
+            _ApiService = apiService;
 
         }
 

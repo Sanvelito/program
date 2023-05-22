@@ -81,7 +81,7 @@ namespace API.Services.UserService
 
             await SetRefreshToken(request.Username,newToken);
 
-            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role, status = "success" };
+            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role };
         }
 
         public async Task<string> RefreshToken(string accessToken, string refreshToken)

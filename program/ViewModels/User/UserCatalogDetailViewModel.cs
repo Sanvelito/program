@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using program.Models;
+using program.Views.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +17,7 @@ namespace program.ViewModels.User
         public UserCatalogDetailViewModel(CompanyDto compDto)
         {
             CompanyDto = compDto;
-            Title = $"{companyDto.CompanyName} Details";
+            Title = $"{companyDto.CompanyName}";
         }
 
         [ObservableProperty]
@@ -23,5 +25,11 @@ namespace program.ViewModels.User
 
         [ObservableProperty]
         private string title;
+
+        [RelayCommand]
+        public async Task CreateOrder()
+        {
+            
+        }
     }
 }

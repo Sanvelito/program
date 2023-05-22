@@ -15,6 +15,12 @@ public partial class UserCatalogDetailPage : ContentPage
     {
         InitializeComponent();
         BindingContext = new UserCatalogDetailViewModel(companyDto);
+        CompanyDto = companyDto;
         //BindingContext = new ServiceHelper.GetService<UserCatalogDetailViewModel>(companyDto);
+    }
+    CompanyDto CompanyDto { get; set; }
+    private async void NavCreateOrder(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CreateOrderPage(CompanyDto));
     }
 }

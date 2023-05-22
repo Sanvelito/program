@@ -37,27 +37,27 @@
     </TabBar>
     <!--User Page-->
     <TabBar>
-        <Tab Title="Main">
+        <Tab Title="Главная">
             <ShellContent
-            Title="Main"
+            Title="Главная"
             ContentTemplate="{DataTemplate viewsUser:MainPage}"
             Route="MainPage" />
         </Tab>
-        <Tab Title="Catalog">
+        <Tab Title="Каталог">
             <ShellContent
-            Title="UserCatalog"
+            Title="Каталог"
             ContentTemplate="{DataTemplate viewsUser:UserCatalogPage}"
             Route="UserCatalogPage" />
         </Tab>
-        <Tab Title="Chat">
+        <Tab Title="Чат">
             <ShellContent
-            Title="UserChat"
+            Title="Чат"
             ContentTemplate="{DataTemplate viewsUser:UserChatPage}"
             Route="UserChatPage" />
         </Tab>
-        <Tab Title="Account">
+        <Tab Title="Профиль">
             <ShellContent
-            Title="UserAccount"
+            Title="Профиль"
             ContentTemplate="{DataTemplate viewsUser:UserAccountPage}"
             Route="UserAccountPage" />
         </Tab>

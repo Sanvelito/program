@@ -14,14 +14,11 @@ namespace program.ViewModels.User
     public partial class UserAccountViewModel : ObservableObject
     {
         private readonly IApiService _ApiService;
-        IConnectivity connectivity;
-        public UserAccountViewModel(IConnectivity connectivity)
+        public UserAccountViewModel(IApiService apiService)
         {
 
-            this.connectivity = connectivity;
-
             // Инициализация Refit для работы с API
-            _ApiService = RestService.For<IApiService>("http://10.0.2.2:5269");
+            _ApiService = apiService;
 
         }
 

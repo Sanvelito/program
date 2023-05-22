@@ -21,15 +21,11 @@ namespace program.ViewModels.User
         [ObservableProperty]
         private ObservableCollection<CompanyDto> companies;
 
-        IConnectivity connectivity;
-        public UserCatalogViewModel(IConnectivity connectivity, IApiService apiService)
+        public UserCatalogViewModel(IApiService apiService)
         {
-
-            this.connectivity = connectivity;
-
             // Инициализация Refit для работы с API
             _ApiService = apiService;
-
+            GetAllCompanies();
         }
 
         [RelayCommand]
