@@ -12,24 +12,29 @@ using static Android.Icu.Text.CaseMap;
 
 namespace program.ViewModels.User
 {
+    [QueryProperty(nameof(CompanyDto), nameof(CompanyDto))]
     public partial class UserCatalogDetailViewModel : ObservableObject
     {
-        public UserCatalogDetailViewModel(CompanyDto compDto)
+        [ObservableProperty]
+        CompanyDto companyDto;
+
+        [ObservableProperty]
+        string title;
+
+        IConnectivity connectivity;
+        public UserCatalogDetailViewModel(IConnectivity connectivity)
         {
-            CompanyDto = compDto;
-            Title = $"{companyDto.CompanyName}";
+            this.connectivity = connectivity;
         }
-
-        [ObservableProperty]
-        private CompanyDto companyDto;
-
-        [ObservableProperty]
-        private string title;
 
         [RelayCommand]
         public async Task CreateOrder()
         {
-            
+            await Shell.Current.GoToAsync($"{nameof(CreateOrderPage)}",
+                    new Dictionary<string, object>
+                    {
+                        ["CompanyDto"] = CompanyDto
+                    });
         }
     }
 }

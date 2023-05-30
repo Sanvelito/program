@@ -1,4 +1,6 @@
-﻿using program.Services;
+﻿using CommunityToolkit.Maui;
+using program.Helpers;
+using program.Services;
 using program.ViewModels;
 using program.ViewModels.User;
 using program.Views.User;
@@ -17,12 +19,22 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			})
+            .UseMauiCommunityToolkit();
+
+        builder.Services.AddTransient<AuthHeaderHandler>();
+
         builder.Services
-    .AddRefitClient<IApiService>()
+    .AddRefitClient<IApiAuthService>()
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://10.0.2.2:5269"));
 
-        builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+        builder.Services
+    .AddRefitClient<IApiService>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://10.0.2.2:5269"))
+    .AddHttpMessageHandler<AuthHeaderHandler>();
+
+        builder.Services.AddSingleton<IConnectivity>((e) => Connectivity.Current);
+        
 
         builder.Services.AddSingleton<LoadingViewModel>();
         builder.Services.AddSingleton<LoginViewModel>();
@@ -30,14 +42,23 @@ public static class MauiProgram
         builder.Services.AddSingleton<UserViewModel>();
         builder.Services.AddSingleton<AdminViewModel>();
 
-        //user
-        builder.Services.AddSingleton<UserAccountViewModel>();
+        //user catalog page
         builder.Services.AddSingleton<UserCatalogViewModel>();
+        builder.Services.AddTransient<UserCatalogPage>();
+        //user catalog - detail page
+        builder.Services.AddTransient<UserCatalogDetailViewModel>();
+        builder.Services.AddTransient<UserCatalogDetailPage>();
+        //user catalog - detail page - create order page
+        builder.Services.AddTransient<UserCreateOrderViewModel>();
+        builder.Services.AddTransient<CreateOrderPage>();
+        
 
-        //builder.Services.AddSingleton<UserCatalogDetailViewModel>();
+        //user acc page
+        builder.Services.AddTransient<UserAccountPage>();
+        builder.Services.AddSingleton<UserAccountViewModel>();
 
 
-        builder.Services.AddSingleton<UserCatalogPage>();
+
         var app = builder.Build();
 		return app;
 	}

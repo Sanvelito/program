@@ -50,7 +50,7 @@
                 HorizontalOptions="Center"
                 Style="{StaticResource ButtonOutline}"
                 Text="Заказать"
-                Clicked="NavCreateOrder"
+                Command="{Binding CreateOrderCommand}"
                 WidthRequest="200" />
 
             <BoxView HeightRequest="1" Color="#DDDDDD" />

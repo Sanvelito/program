@@ -1,24 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="program.Views.User.UserAccountPage"
-             Title="UserAccountPage">
+             Title="Личный кабинет">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
+
         <StackLayout Spacing="10" Padding="20">
-            <Label Text="Личный кабинет" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Ваши данные" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
-            <Label Text="Имя:" FontSize="16" />
-            <Entry Placeholder="Введите ваше имя" />
+            <Label Text="Имя" FontSize="Body" FontAttributes="Bold"/>
+            <Frame Padding="2">
+                <Entry Placeholder="Введите ваше имя" Text="{Binding FirstName}" Margin="5,0,0,0">
+                    <Entry.Behaviors>
+                        <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="2"
+                                MaximumLength="25" />
+                    </Entry.Behaviors>
+                </Entry>
+            </Frame>
 
-            <Label Text="Электронная почта:" FontSize="16" />
-            <Entry Placeholder="Введите вашу электронную почту" />
+            <Label Text="Фамилия" FontSize="Body" FontAttributes="Bold"/>
+            <Frame Padding="2">
+                <Entry Placeholder="Введите вашу фамилию" Text="{Binding LastName}" Margin="5,0,0,0">
+                    <Entry.Behaviors>
+                        <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="2"
+                                MaximumLength="25" />
+                    </Entry.Behaviors>
+                </Entry>
+            </Frame>
 
-            <Label Text="Номер телефона:" FontSize="16" />
-            <Entry Placeholder="Введите ваш номер телефона" />
+            <Label Text="Номер телефона" FontSize="Body" FontAttributes="Bold"/>
+            <Frame Padding="2">
+                <Entry Placeholder="Введите ваш номер телефона" Text="{Binding PhoneNumber}" Keyboard="Telephone" Margin="5,0,0,0" MaxLength="12">
+                    <Entry.Behaviors>
+                        <toolkit:NumericValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
 
-            <Button Text="Сохранить" HorizontalOptions="Center" />
+            </Frame>
+            <Label Text="Новый пароль" FontSize="Body" FontAttributes="Bold"/>
+            <Frame Padding="2">
+                <Entry Placeholder="Введите ваш новый пароль" Text="{Binding Password}" IsPassword="True" Margin="5,0,0,0">
+                    <Entry.Behaviors>
+                        <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="6"
+                                MaximumLength="30" />
+                    </Entry.Behaviors>
+                </Entry>
+            </Frame>
+            <BoxView Color="Black"
+                 Margin="0,10,0,10"
+                 HeightRequest="2"
+                 HorizontalOptions="Fill" />
+            <Button Text="Обновить информацию" Command="{Binding UpdateUserInfoCommand}" HorizontalOptions="Center" />
 
-            <Button Text="Выход" Command="{Binding LogoutCommand}" HorizontalOptions="Center" />
+            <Button Text="Выход" Command="{Binding LogoutCommand}" HorizontalOptions="Center"  />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

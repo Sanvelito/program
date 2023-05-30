@@ -8,6 +8,7 @@
                   SeparatorColor="White"
                   
                   ItemSelected="ListView_ItemSelected"
+
                   SeparatorVisibility="None"
                   HasUnevenRows="True">
             <ListView.ItemTemplate>
@@ -37,6 +38,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Обновить" Command="{Binding GetAllCompaniesCommand}"/>
+        <!--<Button Text="Обновить" Command="{Binding GetAllCompaniesCommand}"/>-->
     </VerticalStackLayout>
 </ContentPage>

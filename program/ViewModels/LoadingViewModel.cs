@@ -12,19 +12,17 @@ namespace program.ViewModels
 {
     public partial class LoadingViewModel
     {
-        private readonly IApiService _ApiService;
-        public LoadingViewModel(IApiService apiService)
+        private readonly IApiAuthService _ApiService;
+        public LoadingViewModel(IApiAuthService apiService)
         {
             _ApiService = apiService;
         }
         
         public async Task<LoginDto> isAuthenticatedAsync()
         {
-            await Task.Delay(2000);
+            //await Task.Delay(2000);
 
-            //var hasAuth = await SecureStorage.GetAsync("hasAuth");
             string refreshTokenInSecure = await SecureStorage.GetAsync("refresh_token");
-            //await App.Current.MainPage.DisplayAlert("Alert", $"{refreshTokenInSecure}", "OK");
             try
             {
                 if (string.IsNullOrEmpty(refreshTokenInSecure)) 

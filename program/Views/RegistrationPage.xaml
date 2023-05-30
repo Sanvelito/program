@@ -1,58 +1,94 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="program.Views.RegistrationPage"
              Title="Регистрация">
-
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentPage.Resources>
 
     <VerticalStackLayout VerticalOptions="CenterAndExpand">
         <VerticalStackLayout Padding="10">
-            <Label FontFamily="Consolas" Text="Username"/>
+            <Label Text="Логин" FontSize="Body" FontAttributes="Bold"/>
             <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
                 <VerticalStackLayout>
 
                     <Entry x:Name="Username" Text="{Binding Username}" Margin="5,0,0,0" Placeholder="Логин" FontSize="18">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="5"
+                                MaximumLength="30" />
+                        </Entry.Behaviors>
                     </Entry>
 
                 </VerticalStackLayout>
             </Frame>
             <VerticalStackLayout Padding="0" Margin="0,5,0,0">
-                <Label FontFamily="Consolas" Text="Password"/>
+                <Label Text="Пароль" FontSize="Body" FontAttributes="Bold"/>
                 <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
                     <Entry x:Name="Password" Text="{Binding Password}" Margin="5,0,0,0" Placeholder="Пароль"
                                    IsPassword="True" FontSize="18">
                         <Entry.Behaviors>
-
+                            <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="6"
+                                MaximumLength="30" />
                         </Entry.Behaviors>
                     </Entry>
                 </Frame>
             </VerticalStackLayout>
             <VerticalStackLayout Padding="0" Margin="0,5,0,0">
-                <Label FontFamily="Consolas" Text="FirstName"/>
+                <Label Text="Имя" FontSize="Body" FontAttributes="Bold"/>
                 <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
                     <Entry x:Name="FirstName" Text="{Binding FirstName}" Margin="5,0,0,0" Placeholder="Имя" FontSize="18">
                         <Entry.Behaviors>
-
+                            <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="2"
+                                MaximumLength="25" />
                         </Entry.Behaviors>
                     </Entry>
                 </Frame>
             </VerticalStackLayout>
             <VerticalStackLayout Padding="0" Margin="0,5,0,0">
-                <Label FontFamily="Consolas" Text="LastName"/>
+                <Label Text="Фамилия" FontSize="Body" FontAttributes="Bold"/>
                 <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
                     <Entry x:Name="LastName" Text="{Binding LastName}" Margin="5,0,0,0" Placeholder="Фамилия" FontSize="18">
                         <Entry.Behaviors>
-
+                            <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="2"
+                                MaximumLength="25" />
                         </Entry.Behaviors>
                     </Entry>
                 </Frame>
             </VerticalStackLayout>
             <VerticalStackLayout Padding="0" Margin="0,5,0,0">
-                <Label FontFamily="Consolas" Text="PhoneNumber"/>
+                <Label Text="Номер телефона" FontSize="Body" FontAttributes="Bold"/>
                 <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
-                    <Entry x:Name="PhoneNumber" Text="{Binding PhoneNumber}" Margin="5,0,0,0" Placeholder="PhoneNumber" FontSize="18">
+                    <Entry x:Name="PhoneNumber" Text="{Binding PhoneNumber}" Margin="5,0,0,0" Placeholder="Номер телефона" 
+                           Keyboard="Telephone" MaxLength="12" 
+                           FontSize="18">
                         <Entry.Behaviors>
-
+                        <toolkit:NumericValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged"/>
                         </Entry.Behaviors>
                     </Entry>
                 </Frame>
@@ -69,14 +105,6 @@
                                 HorizontalOptions="FillAndExpand"/>
 
         </VerticalStackLayout>
-        <!--<VerticalStackLayout>
 
-        <Entry Placeholder="Username" Text="{Binding Username}"/>
-        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
-        <Entry Placeholder="FirstName" Text="{Binding FirstName}"/>
-        <Entry Placeholder="LastName" Text="{Binding LastName}"/>
-        <Entry Placeholder="PhoneNumber" Text="{Binding PhoneNumber}"/>
-
-        <Button Text="Register" Command="{Binding RegisterCommand}"/>-->
     </VerticalStackLayout>
 </ContentPage>

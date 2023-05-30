@@ -5,9 +5,9 @@ namespace program.Views.User;
 
 public partial class UserAccountPage : ContentPage
 {
-	public UserAccountPage()
+	public UserAccountPage(UserAccountViewModel vm)
 	{
 		InitializeComponent();
-        BindingContext = ServiceHelper.GetService<UserAccountViewModel>();
+        BindingContext = vm;
     }
 }

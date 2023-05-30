@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Primitives;
 using API.Models.Dto;
+using API.Models;
 
 namespace API.Services.UserService
 {
@@ -28,14 +29,15 @@ namespace API.Services.UserService
         
 
 
-        public string GetMyName()
+        public async Task<UserInfoDto> GetMyInfo()
         {
-            var result = string.Empty;
+            var Username = string.Empty;
             if (_httpContextAccessor != null)
             {
-                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+                Username = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             }
-            return result;
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == Username);
+            return new UserInfoDto { Username = user.Username, FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber, Role = user.Role };
         }
         
         public async Task<User> Register(RegisterDto request)
@@ -84,13 +86,13 @@ namespace API.Services.UserService
             return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role };
         }
 
-        public async Task<string> RefreshToken(string accessToken, string refreshToken)
+        public async Task<string> RefreshToken(string refreshTokenInSecure)
         {
-            var jwt = new JwtSecurityToken(accessToken);
-            string userName = jwt.Claims.First(c => c.Type == "name").Value;
+            //var jwt = new JwtSecurityToken(accessToken);
+            //string userName = jwt.Claims.First(c => c.Type == "name").Value;
 
-            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == userName);
-            if (!user.RefreshToken.Equals(refreshToken))
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.RefreshToken == refreshTokenInSecure);
+            if (!user.RefreshToken.Equals(refreshTokenInSecure))
             {
                 return "irt";
             }
@@ -101,7 +103,7 @@ namespace API.Services.UserService
 
             string token = CreateToken(user);
             var newRefreshToken = GenerateRefreshToken();
-            await SetRefreshToken(userName,newRefreshToken);
+            await SetRefreshToken(user.Username,newRefreshToken);
 
             return token;
         }
@@ -221,7 +223,28 @@ namespace API.Services.UserService
             return await _context.Users.ToListAsync();
         }
 
-
+        public async Task<UserInfoDto> UpdateUserInfo(UserInfoDto request)
+        {
+            var Username = string.Empty;
+            if (_httpContextAccessor != null)
+            {
+                Username = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            }
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == Username);
+            if (user is null)
+                return null;
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.PhoneNumber = request.PhoneNumber;
+            if(request.Password != null) 
+            {
+                CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
+            }
+            await _context.SaveChangesAsync();
+            return new UserInfoDto { Username = user.Username, FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber, Role = user.Role };
+        }
         #endregion
 
     }

@@ -46,20 +46,23 @@
         <Tab Title="Каталог">
             <ShellContent
             Title="Каталог"
-            ContentTemplate="{DataTemplate viewsUser:UserCatalogPage}"
-            Route="UserCatalogPage" />
+            ContentTemplate="{DataTemplate viewsUser:UserCatalogPage}"/>
         </Tab>
         <Tab Title="Чат">
             <ShellContent
             Title="Чат"
-            ContentTemplate="{DataTemplate viewsUser:UserChatPage}"
-            Route="UserChatPage" />
+            ContentTemplate="{DataTemplate viewsUser:UserChatPage}"/>
         </Tab>
         <Tab Title="Профиль">
             <ShellContent
             Title="Профиль"
             ContentTemplate="{DataTemplate viewsUser:UserAccountPage}"
-            Route="UserAccountPage" />
+            />
         </Tab>
     </TabBar>
+
+    <ShellContent
+            ContentTemplate="{DataTemplate viewsUser:UserCatalogDetailPage}"/>
+    <ShellContent
+            ContentTemplate="{DataTemplate viewsUser:CreateOrderPage}"/>
 </Shell>

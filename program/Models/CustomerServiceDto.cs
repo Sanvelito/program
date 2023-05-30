@@ -1,4 +1,10 @@
-﻿namespace API.Models.Dto
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace program.Models
 {
     public class CustomerServiceDto
     {
@@ -6,7 +12,7 @@
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
         public string CompanyName { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ServiceName { get; set; }

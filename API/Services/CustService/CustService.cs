@@ -77,7 +77,7 @@ namespace API.Services.CustService
                 UserId = user.Id,
                 CompanyServiceId = service.Id,
                 CompanyName = company?.Name,
-                CreatedDate = dto.CreatedDate,
+                CreatedDate = DateTime.Now,
                 Description = dto.Description,
                 Address = dto.Address,
                 Status = dto.Status

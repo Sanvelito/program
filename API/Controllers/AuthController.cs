@@ -55,9 +55,9 @@ namespace API.Controllers
         }
 
         [HttpPost("refresh-token")]
-        public async Task<ActionResult<string>> RefreshToken(string accessToken, string refreshToken)
+        public async Task<ActionResult<string>> RefreshToken(string refreshToken)
         {
-            var result =  await _userService.RefreshToken(accessToken, refreshToken);
+            var result =  await _userService.RefreshToken(refreshToken);
             if (result is "irt")
             {
                 return Unauthorized("Invalid refresh token");
@@ -75,13 +75,6 @@ namespace API.Controllers
         {
             var result = await _userService.CheckAuth(request);
             return Ok(result);
-        }
-
-        [HttpGet, Authorize]
-        public ActionResult<object> GetMe()
-        {
-            var userName = _userService.GetMyName();
-            return Ok(userName);
         }
     }
 }

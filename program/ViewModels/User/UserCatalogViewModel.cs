@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using program.Models;
 using program.Services;
+using program.Views.User;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,15 @@ namespace program.ViewModels.User
         
 
         [ObservableProperty]
-        private ObservableCollection<CompanyDto> companies;
+        ObservableCollection<CompanyDto> companies;
 
-        public UserCatalogViewModel(IApiService apiService)
+        [ObservableProperty]
+        CompanyDto companyDto;
+
+        IConnectivity connectivity;
+        public UserCatalogViewModel(IConnectivity connectivity, IApiService apiService)
         {
+            this.connectivity = connectivity;
             // Инициализация Refit для работы с API
             _ApiService = apiService;
             GetAllCompanies();
@@ -43,5 +49,19 @@ namespace program.ViewModels.User
                 Console.WriteLine(ex);
             }
         }
-    }
+        public async void ItemSelected(CompanyDto companyDto)
+        {
+            CompanyDto = companyDto;
+            await Shell.Current.GoToAsync($"{nameof(UserCatalogDetailPage)}",
+                    new Dictionary<string, object>
+                    {
+                        ["CompanyDto"] = CompanyDto
+                    });
+        }
+
+    // Дополнительные действия, если необходимо
+    // Сбросить выбор элемента в списке
+    //((ListView)sender).SelectedItem = null;
+
+}
 }

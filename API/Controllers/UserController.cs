@@ -52,5 +52,22 @@ namespace API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet, Authorize]
+        public async Task<ActionResult<UserInfoDto>> GetMyInfo()
+        {
+            var result = await _userService.GetMyInfo();
+            if (result is null)
+                return NotFound("User not found.");
+            return Ok(result);
+        }
+        [HttpPut, Authorize]
+        public async Task<ActionResult<UserInfoDto>> UpdateUserInfo(UserInfoDto request)
+        {
+            var result = await _userService.UpdateUserInfo(request);
+            if (result is null)
+                return NotFound("User not found.");
+            return Ok(result);
+        }
     }
 }

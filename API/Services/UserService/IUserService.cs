@@ -4,10 +4,11 @@ namespace API.Services.UserService
 {
     public interface IUserService
     {
-        string GetMyName();
+        Task<UserInfoDto> GetMyInfo();
+        Task<UserInfoDto> UpdateUserInfo(UserInfoDto request);
         Task<User> Register(RegisterDto request);
         Task<LoginDto> Login(UserDto request);
-        Task<string> RefreshToken(string accessToken, string refreshToken);
+        Task<string> RefreshToken(string refreshToken);
         Task<LoginDto> CheckAuth(string refreshTokenInSecure);
 
 

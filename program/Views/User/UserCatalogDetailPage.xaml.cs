@@ -7,20 +7,16 @@ namespace program.Views.User;
 [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class UserCatalogDetailPage : ContentPage
 {
-    public UserCatalogDetailPage()
+    UserCatalogDetailViewModel _viewModel;
+    public UserCatalogDetailPage(UserCatalogDetailViewModel vm)
     {
         InitializeComponent();
+        BindingContext = _viewModel = vm;
+        
     }
-    public UserCatalogDetailPage(CompanyDto companyDto)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        InitializeComponent();
-        BindingContext = new UserCatalogDetailViewModel(companyDto);
-        CompanyDto = companyDto;
-        //BindingContext = new ServiceHelper.GetService<UserCatalogDetailViewModel>(companyDto);
-    }
-    CompanyDto CompanyDto { get; set; }
-    private async void NavCreateOrder(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new CreateOrderPage(CompanyDto));
+        base.OnNavigatedTo(args);
+        Title = $"{_viewModel.CompanyDto.CompanyName}";
     }
 }

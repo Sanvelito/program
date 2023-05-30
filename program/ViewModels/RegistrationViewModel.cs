@@ -60,17 +60,30 @@ namespace program.ViewModels
                 {
                     return false;
                 }
-                if (this.PhoneNumber == 0)
+                string numberString = PhoneNumber.ToString();
+                if (numberString.Length != 12)
                 {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен номер!", "OK");
                     return false;
                 }
+                if(Username.Length < 5)
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Длинна логина должна быть больше 4 символов!", "OK");
+                    return false;
+                }
+                if (Password.Length < 6)
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Длинна пароля должна быть больше 5 символов!", "OK");
+                    return false;
+                }
+
                 // Отправка запроса на сервер
                 RegisterDto response = await _ApiService.Register(new RegisterDto
                 {
                     Username = this.Username,
                     Password = this.Password,
                     FirstName = this.FirstName,
-                    LastName = this.lastName,
+                    LastName = this.LastName,
                     PhoneNumber = this.PhoneNumber
                 });
                 await App.Current.MainPage.DisplayAlert("Alert", $"success", "OK");

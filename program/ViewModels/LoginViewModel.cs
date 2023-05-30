@@ -21,7 +21,7 @@ namespace program.ViewModels
     //[INotifyPropertyChanged]
     public partial class LoginViewModel : ObservableObject
     {
-        private readonly IApiService _ApiService;
+        private readonly IApiAuthService _ApiService;
 
         [ObservableProperty]
         string password;
@@ -29,7 +29,7 @@ namespace program.ViewModels
         [ObservableProperty]
         string username;
 
-        public LoginViewModel(IApiService apiService)
+        public LoginViewModel(IApiAuthService apiService)
         {
 
             // Инициализация Refit для работы с API
@@ -76,8 +76,8 @@ namespace program.ViewModels
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Упс!", "Логин или Пароль не верны", "OK");
-                //await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                //await App.Current.MainPage.DisplayAlert("Упс!", "Логин или Пароль не верны", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
                 return false;
