@@ -25,18 +25,26 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<CustomerServiceDto>>> GetAllOrders()
-        {
-            var result = await _CustomerService.GetCustomerOrders();
-            return Ok(result);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<List<CustomerServiceDto>>> GetAllOrders()
+        //{
+        //    var result = await _CustomerService.GetCustomerOrders();
+        //    return Ok(result);
+        //}
 
         [HttpPost]
         [Authorize (Roles = "user")]
         public async Task<ActionResult<CustomerServiceDto>> AddCustomerService(CustomerServiceDto dto)
         {
             var result = await _CustomerService.AddCustomerService(dto);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<List<CustomerServiceDto>>> GetUserOrders()
+        {
+            var result = await _CustomerService.GetUserOrders();
             return Ok(result);
         }
     }

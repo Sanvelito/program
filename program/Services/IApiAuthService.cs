@@ -26,5 +26,9 @@ namespace program.Services
         Task<string> AddNewCompany([Body] CompanyDto requst);
         [Delete("/api/Company/{id}")]
         Task<string> DeleteCompany(int id);
+
+
+        //user
+
     }
 }

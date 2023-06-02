@@ -121,8 +121,8 @@ namespace program.ViewModels.User
                     await App.Current.MainPage.DisplayAlert("Упс!", "Введены некоректные данные", "OK");
                     return false;
                 }
-                CustomerServiceDto response = await _ApiService.AddCustomerService(new CustomerServiceDto 
-                { 
+                CustomerServiceDto response = await _ApiService.AddCustomerService(new CustomerServiceDto
+                {
                     Username = Username,
                     FirstName = FirstName,
                     LastName = LastName,
@@ -134,7 +134,7 @@ namespace program.ViewModels.User
                     Address = Address,
                     Status = "Ожидание ответа исполнителя"
                 });
-                await App.Current.MainPage.DisplayAlert("Упс!", "Заказ составлен", "OK");
+                await App.Current.MainPage.DisplayAlert("Yes!", "Заказ составлен", "OK");
                 return true;
             }
             catch (Exception ex)

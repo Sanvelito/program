@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="program.Views.Admin.AdminMainPage"
              Title="AdminMainPage">
-    <VerticalStackLayout>
-        <Button Text="Logout" Command="{Binding LogoutCommand}"/>
-    </VerticalStackLayout>
+    <StackLayout>
+        <Label Text="Добро пожаловать Администратор!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+        <Button Text="Выйти" Command="{Binding LogoutCommand}" Margin="10" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+    </StackLayout>
 </ContentPage>

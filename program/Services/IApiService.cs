@@ -33,5 +33,9 @@ namespace program.Services
         [Headers("Authorization: Bearer")]
         [Put("/api/User")]
         Task<UserInfoDto> UpdateUserInfo([Body] UserInfoDto request);
+
+        [Headers("Authorization: Bearer")]
+        [Get("/api/Customer")]
+        Task<List<CustomerServiceDto>> GetUserOrders();
     }
 }

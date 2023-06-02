@@ -54,7 +54,10 @@ public static class MauiProgram
         //user catalog - detail page - create order page
         builder.Services.AddTransient<UserCreateOrderViewModel>();
         builder.Services.AddTransient<CreateOrderPage>();
-        
+
+        //user chat page
+        builder.Services.AddTransient<UserChatViewModel>();
+        builder.Services.AddTransient<UserChatPage>();
 
         //user acc page
         builder.Services.AddTransient<UserAccountPage>();

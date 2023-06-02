@@ -1,15 +1,19 @@
 ﻿using API.Models.Dto;
 using API.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Services.CustService
 {
     public class CustService : ICustomerService
     {
+        public IHttpContextAccessor _httpContextAccessor { get; }
         public DataContext _context { get; }
-        public CustService(DataContext context)
+        public CustService(DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<CustomerServiceDto> GetCustomerOrder(int id)
         {
@@ -78,6 +82,7 @@ namespace API.Services.CustService
                 CompanyServiceId = service.Id,
                 CompanyName = company?.Name,
                 CreatedDate = DateTime.Now,
+                DeadLine = dto.DeadLine,
                 Description = dto.Description,
                 Address = dto.Address,
                 Status = dto.Status
@@ -91,6 +96,39 @@ namespace API.Services.CustService
             //dto.Id = customerService.Id;
 
             return dto;
+        }
+        public async Task<List<CustomerServiceDto>> GetUserOrders()
+        {
+            var Username = string.Empty;
+            if (_httpContextAccessor != null)
+            {
+                Username = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            }
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == Username);
+
+            var customerServices = await _context.CustomerServices
+                .Include(cs => cs.User)
+                .Include(cs => cs.CompanyService)
+                .ThenInclude(cs => cs.Service).Where(cs => cs.User.Username == user.Username)
+                .ToListAsync();
+
+            var result = customerServices.Select(cs => new CustomerServiceDto
+            {
+                Id = cs.Id,
+                Username = cs.User.Username,
+                FirstName = cs.User.FirstName,
+                LastName = cs.User.LastName,
+                PhoneNumber = cs.User.PhoneNumber,
+                CompanyName = cs.CompanyName,
+                CreatedDate = cs.CreatedDate,
+                ServiceName = cs.CompanyService.Service.Name,
+                DeadLine = cs.DeadLine,
+                Description = cs.Description,
+                Address = cs.Address,
+                Status = cs.Status
+            }).ToList();
+
+            return result;
         }
     }
 }

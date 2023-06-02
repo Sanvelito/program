@@ -7,5 +7,6 @@ namespace API.Services.CustService
         Task<CustomerServiceDto> GetCustomerOrder(int id);
         Task<List<CustomerServiceDto>> GetCustomerOrders();
         Task<CustomerServiceDto> AddCustomerService(CustomerServiceDto dto);
+        Task<List<CustomerServiceDto>> GetUserOrders();
     }
 }
