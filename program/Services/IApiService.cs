@@ -16,8 +16,8 @@ namespace program.Services
         //[Post("/api/Auth/login")]
         //Task<LoginDto> Login([Body] UserDto request);
 
-        [Post("/api/Auth/register")]
-        Task<RegisterDto> Register([Body] RegisterDto request);
+        //[Post("/api/Auth/register")]
+        //Task<RegisterDto> Register([Body] RegisterDto request);
 
         [Get("/api/Company")]
         Task<List<CompanyDto>> GetAllCompanies();

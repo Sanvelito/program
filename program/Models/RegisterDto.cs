@@ -12,6 +12,6 @@ namespace program.Models
         public string Password { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public int PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
     }
 }

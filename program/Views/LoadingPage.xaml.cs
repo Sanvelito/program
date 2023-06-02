@@ -1,6 +1,7 @@
 using program.Helpers;
 using program.Models;
 using program.ViewModels;
+using program.Views.Admin;
 using program.Views.User;
 
 namespace program.Views;
@@ -27,7 +28,7 @@ public partial class LoadingPage : ContentPage
         }
         else if (loginDto.role == "admin")
         {
-            await Shell.Current.GoToAsync($"///{nameof(AdminPage)}");
+            await Shell.Current.GoToAsync($"///{nameof(AdminMainPage)}");
         }
         else if (loginDto.role == "user")
         {

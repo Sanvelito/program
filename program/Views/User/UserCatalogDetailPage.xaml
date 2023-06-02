@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="program.Views.User.UserCatalogDetailPage"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
         <StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="80" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -17,36 +23,39 @@
                 </Grid.ColumnDefinitions>
                 <BoxView
                     Grid.ColumnSpan="3"
-                    BackgroundColor="{StaticResource Primary}"
-                    HeightRequest="100"
+                    Color="{StaticResource Primary}"
+                    HeightRequest="80"
                     HorizontalOptions="FillAndExpand" />
                 <StackLayout
                     Grid.RowSpan="2"
                     Grid.Column="1"
-                    Margin="0,50,0,0">
+                    Margin="0,25,0,0">
+                    <Image Grid.Column="0" Source="{Binding CompanyDto.CompanyImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
+                           MaximumWidthRequest="100" MaximumHeightRequest="100" Margin="5,0,0,0"/>
+                    
                 </StackLayout>
 
                 <Label
                     Grid.Row="1"
                     Margin="10"
-                    FontSize="Micro"
+                    FontSize="14"
                     HorizontalOptions="Center"
-                    Text="{Binding CompanyDto.CompanyName}" />
+                    Text="{Binding CompanyDto.CompanyPhoneNumber}" />
                 <Label
                     Grid.Row="1"
                     Grid.Column="2"
                     Margin="10"
-                    FontSize="Micro"
+                    FontSize="14"
                     HorizontalOptions="Center"
-                    Text="some txt" />
+                    Text="{Binding CompanyDto.CompanyEmail}" />
             </Grid>
             <Label
                 FontAttributes="Bold"
-                FontSize="Medium"
+                FontSize="Large"
                 HorizontalOptions="Center"
                 Text="{Binding CompanyDto.CompanyName}" />
             <Button
-                Margin="8"
+                Margin="5"
                 HorizontalOptions="Center"
                 Style="{StaticResource ButtonOutline}"
                 Text="Заказать"
@@ -59,19 +68,32 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="{Binding Key}" FontAttributes="Bold" />
-
-                            <CollectionView ItemsSource="{Binding Value}">
+                            <Label Text="{Binding Key}" FontAttributes="Bold" FontSize="18" Margin="10,5,0,0"/>
+                            <Border Padding="5" StrokeThickness="2" Stroke="{StaticResource Primary}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="0" />
+                                </Border.StrokeShape>
+                                <CollectionView ItemsSource="{Binding Value}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <StackLayout>
-                                            <Label Text="{Binding Name}" FontAttributes="Bold" />
-                                            <Label Text="{Binding Description}" />
-                                            <Label Text="{Binding Price}" />
-                                        </StackLayout>
+                                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" Margin="5,5,0,0"/>
+                                                <Border Padding="5">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="10" />
+                                                    </Border.StrokeShape>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding Description}" FontSize="15"/>
+
+                                                        <Label Text="{Binding Price}" HorizontalOptions="EndAndExpand" FontSize="15"/>
+                                                        <Label Text=" руб " FontSize="15"/>
+                                                    </StackLayout>
+                                                </Border>
+                                            </StackLayout>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
+                            </Border>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

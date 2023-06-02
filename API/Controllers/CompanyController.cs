@@ -30,5 +30,23 @@ namespace API.Controllers
             var result = await _CompanyService.GetAllCompanies();
             return Ok(result);
         }
+        [HttpPut]
+        public async Task<ActionResult<string>> UpdateCompany(CompanyDto companyDto)
+        {
+            var result = await _CompanyService.UpdateCompany(companyDto);
+            return Ok(result);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<string>> DeleteCompany(int id)
+        {
+            var result = await _CompanyService.DeleteCompany(id);
+            return Ok(result);
+        }
+        [HttpPost]
+        public async Task<ActionResult<string>> AddNewCompany(CompanyDto companyDto)
+        {
+            var result = await _CompanyService.AddNewCompany(companyDto);
+            return Ok(result);
+        }
     }
 }

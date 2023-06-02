@@ -6,7 +6,7 @@
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
         public string CompanyName { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ServiceName { get; set; }

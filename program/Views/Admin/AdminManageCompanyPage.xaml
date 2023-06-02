@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="program.Views.User.UserCatalogPage"
-             Title="Каталог">
+             x:Class="program.Views.Admin.AdminManageCompanyPage"
+             Title="Список компаний">
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
@@ -14,7 +14,7 @@
                   ItemSelected="ListView_ItemSelected"
                   SeparatorVisibility="None"
                   HasUnevenRows="True"
-                  Margin="0,0,0,0">
+                  Margin="0,0,0,5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -44,6 +44,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-       
+        <Button Text="Обновить" Command="{Binding RefreshCommand}" Margin="5"/>
+        <Button Text="Новая компания" Command="{Binding AddNewCompanyCommand}" Margin="5,0,5,0"/>
     </StackLayout>
 </ContentPage>

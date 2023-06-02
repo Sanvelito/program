@@ -15,6 +15,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using program.Views;
 using program.Views.User;
+using program.Views.Admin;
 
 namespace program.ViewModels
 {
@@ -63,7 +64,7 @@ namespace program.ViewModels
                 await App.Current.MainPage.DisplayAlert("Alert", "Вход", "OK");
                 if(response.role == "admin")
                 {
-                    await Shell.Current.GoToAsync($"///{nameof(AdminPage)}");
+                    await Shell.Current.GoToAsync($"///{nameof(AdminMainPage)}");
 
                 }
                 if (response.role == "user")

@@ -1,4 +1,5 @@
-﻿using API.Models.Dto;
+﻿using API.Models;
+using API.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Services.CompanyService
@@ -16,7 +17,11 @@ namespace API.Services.CompanyService
 
             var result = new CompanyDto
             {
-                CompanyName = company.Name
+                Id = company.Id,
+                CompanyName = company.Name,
+                CompanyPhoneNumber = company.PhoneNumber,
+                CompanyEmail = company.Email,
+                CompanyImage = company.Image
             };
 
             var serivces = _context.CompanyServices
@@ -60,7 +65,11 @@ namespace API.Services.CompanyService
 
                 var companyDto = new CompanyDto
                 {
+                    Id = company.Id,
                     CompanyName = company.Name,
+                    CompanyPhoneNumber = company.PhoneNumber,
+                    CompanyEmail = company.Email,
+                    CompanyImage = company.Image,
                     ServicesGroup = new Dictionary<string, List<CompanyServiceDto>>()
                 };
 
@@ -85,6 +94,56 @@ namespace API.Services.CompanyService
             }
 
             return result;
+        }
+        public async Task<string> UpdateCompany(CompanyDto companyDto)
+        {
+            var company = (await _context.Companies.FirstOrDefaultAsync(c => c.Id == companyDto.Id))!;
+
+            var anotherCompany = (await _context.Companies.FirstOrDefaultAsync(c => c.Name == companyDto.CompanyName))!;
+
+            if (company is null)
+                return "Company not found";
+
+            if (anotherCompany != null)
+            {
+                return "Company name used";
+            }
+
+            company.Name = companyDto.CompanyName;
+            company.PhoneNumber = companyDto.CompanyPhoneNumber;
+            company.Email = companyDto.CompanyEmail;
+            company.Image = companyDto.CompanyImage;
+
+            await _context.SaveChangesAsync();
+
+            return "Success";
+        }
+        public async Task<string> AddNewCompany(CompanyDto companyDto)
+        {
+            var company = (await _context.Companies.FirstOrDefaultAsync(c => c.Name == companyDto.CompanyName))!;
+            if(company != null )
+            {
+                return "Company name used";
+            }
+
+            Company newComp = new Company();
+            newComp.Name = companyDto.CompanyName;
+            newComp.PhoneNumber = companyDto.CompanyPhoneNumber;
+            newComp.Email = companyDto.CompanyEmail;
+            newComp.Image = companyDto.CompanyImage;
+
+            _context.Companies.Add(newComp);
+            await _context.SaveChangesAsync();
+            return "Success";
+        }
+        public async Task<string> DeleteCompany(int id)
+        {
+            var company = (await _context.Companies.FirstOrDefaultAsync(c => c.Id == id))!;
+            if (company is null)
+                return "Company not found";
+            _context.Companies.Remove(company);
+            await _context.SaveChangesAsync();
+            return "Success";
         }
     }
 }

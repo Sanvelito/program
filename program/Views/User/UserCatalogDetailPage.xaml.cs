@@ -14,9 +14,9 @@ public partial class UserCatalogDetailPage : ContentPage
         BindingContext = _viewModel = vm;
         
     }
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnAppearing()
     {
-        base.OnNavigatedTo(args);
+        base.OnAppearing();
         Title = $"{_viewModel.CompanyDto.CompanyName}";
     }
 }

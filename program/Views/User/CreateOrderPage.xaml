@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="program.Views.User.CreateOrderPage"
              Title="{Binding Title}">
+    <ScrollView>
     <StackLayout Margin="20">
         <Label Text="{Binding CompanyDto.CompanyName}" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
         <Label Text="Данные заказчика" FontSize="Medium" FontAttributes="Bold"/>
@@ -77,14 +78,14 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
-            <Entry Placeholder="Адрес" Text="{Binding Address}" Margin="10,0,0,0" />
+            <Entry Placeholder="Адрес" Text="{Binding Address}" Margin="10,0,0,0"/>
         </Border>
         <Label Text="Доп. информация" FontSize="Body" FontAttributes="Bold"/>
         <Border Padding="2" >
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
-            <Entry Placeholder="Информация" Text="{Binding Description}" Margin="10,0,0,0"/>
+            <Editor Placeholder="Информация" Text="{Binding Description}" Margin="10,0,0,0" HeightRequest="80" />
         </Border>
         
 
@@ -96,4 +97,5 @@
         <Button Text="Отправить заявку" Command="{Binding CreateOrderCommand}"/>
         <!--<Button Text="Submit" Clicked="" />-->
     </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using program.Views;
+using program.Views.Admin;
 using program.Views.User;
 
 namespace program;
@@ -23,5 +24,11 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(UserCatalogDetailPage), typeof(UserCatalogDetailPage));
         Routing.RegisterRoute(nameof(CreateOrderPage), typeof(CreateOrderPage));
+
+        //admin
+        Routing.RegisterRoute(nameof(AdminMainPage), typeof(AdminMainPage));
+        Routing.RegisterRoute(nameof(AdminManageCompanyPage), typeof(AdminManageCompanyPage));
+        Routing.RegisterRoute(nameof(DetailManageCompanyPage), typeof(DetailManageCompanyPage));
+        //manager
     }
 }

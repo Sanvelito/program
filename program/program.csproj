@@ -11,7 +11,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>program</ApplicationTitle>
+		<ApplicationTitle>House Builder</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.program</ApplicationId>
@@ -31,7 +31,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#FFFFFF" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -49,6 +49,13 @@
 
 	<ItemGroup>
 	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+	  <None Remove="Resources\Images\account.png" />
+	  <None Remove="Resources\Images\catalog.png" />
+	  <None Remove="Resources\Images\chat.png" />
+	  <None Remove="Resources\Images\folder.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\hs.png" />
+	  <None Remove="Resources\Images\hs2.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -65,6 +72,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Admin\AdminManageCompanyPage.xaml.cs">
+	    <DependentUpon>AdminManageCompanyPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Admin\DetailManageCompanyPage.xaml.cs">
+	    <DependentUpon>DetailManageCompanyPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\UserPage.xaml.cs">
 	    <DependentUpon>UserPage.xaml</DependentUpon>
 	  </Compile>
@@ -72,6 +85,15 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\AdminPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Admin\AdminMainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Admin\AdminManageCompanyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Admin\DetailManageCompanyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoadingPage.xaml">
@@ -104,6 +126,11 @@
 	  <MauiXaml Update="Views\User\UserChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\Manager\" />
+	  <Folder Include="Views\Manager\" />
 	</ItemGroup>
 
 </Project>

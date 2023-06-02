@@ -15,7 +15,7 @@ namespace program.ViewModels
 {
     public partial class RegistrationViewModel : ObservableObject
     {
-        private readonly IApiService _ApiService;
+        private readonly IApiAuthService _ApiService;
 
         [ObservableProperty]
         string password;
@@ -30,9 +30,9 @@ namespace program.ViewModels
         string lastName;
 
         [ObservableProperty]
-        int phoneNumber;
+        long phoneNumber;
 
-        public RegistrationViewModel(IApiService apiService)
+        public RegistrationViewModel(IApiAuthService apiService)
         {
             // Инициализация Refit для работы с API
             _ApiService = apiService;

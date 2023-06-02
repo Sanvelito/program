@@ -12,9 +12,6 @@ namespace program.Helpers
     class AuthHeaderHandler : DelegatingHandler
     {
 
-        private readonly string refreshTokenInSecure;
-        private readonly string accessTokenInSecure;
-
         private readonly IApiAuthService _apiAuthService;
         public AuthHeaderHandler(IApiAuthService apiService)
         {

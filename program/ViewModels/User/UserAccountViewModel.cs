@@ -35,7 +35,7 @@ namespace program.ViewModels.User
 
             // Инициализация Refit для работы с API
             _ApiService = apiService;
-            GetMyInfo();
+            
         }
 
         [RelayCommand]

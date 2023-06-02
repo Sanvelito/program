@@ -6,7 +6,10 @@
     xmlns:local="clr-namespace:program"
     xmlns:views="clr-namespace:program.Views"
     xmlns:viewsUser="clr-namespace:program.Views.User"
+    xmlns:viewsAdmin="clr-namespace:program.Views.Admin"
     Shell.FlyoutBehavior="Disabled">
+    
+    <!--xmlns:viewsManager="clr-namespace:program.Views.Manager"-->
     
     <!--Loading Page-->
     <ShellContent
@@ -20,40 +23,40 @@
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"/>
     
-    <!--Main Page-->
+    <!--Admin Pages-->
     <TabBar>
         <Tab Title="Admin">
             <ShellContent
             Title="Admin"
-            ContentTemplate="{DataTemplate views:AdminPage}"
-            Route="AdminPage" />
+            ContentTemplate="{DataTemplate viewsAdmin:AdminMainPage}"
+            Route="AdminMainPage" />
         </Tab>
-        <Tab Title="User">
+        <Tab Title="Company">
             <ShellContent
-            Title="User"
-            ContentTemplate="{DataTemplate views:UserPage}"
-            Route="UserPage" />
+            Title="Company"
+            ContentTemplate="{DataTemplate viewsAdmin:AdminManageCompanyPage}"
+            Route="AdminManageCompanyPage" />
         </Tab>
     </TabBar>
-    <!--User Page-->
+    <!--User Pages-->
     <TabBar>
-        <Tab Title="Главная">
+        <Tab Title="Главная" Icon="home.png">
             <ShellContent
             Title="Главная"
             ContentTemplate="{DataTemplate viewsUser:MainPage}"
             Route="MainPage" />
         </Tab>
-        <Tab Title="Каталог">
+        <Tab Title="Каталог" Icon="catalog.png">
             <ShellContent
             Title="Каталог"
             ContentTemplate="{DataTemplate viewsUser:UserCatalogPage}"/>
         </Tab>
-        <Tab Title="Чат">
+        <Tab Title="Чат" Icon="chat.png">
             <ShellContent
             Title="Чат"
             ContentTemplate="{DataTemplate viewsUser:UserChatPage}"/>
         </Tab>
-        <Tab Title="Профиль">
+        <Tab Title="Профиль" Icon="account.png">
             <ShellContent
             Title="Профиль"
             ContentTemplate="{DataTemplate viewsUser:UserAccountPage}"

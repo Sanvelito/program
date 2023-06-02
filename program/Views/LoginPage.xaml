@@ -7,8 +7,9 @@
              Shell.NavBarIsVisible="False"
              Title="Вход">
     <VerticalStackLayout VerticalOptions="CenterAndExpand">
-        <VerticalStackLayout Padding="10">
-            <Label FontFamily="Consolas" Text="Username"/>
+        <VerticalStackLayout Margin="20">
+            <Image Source="hs2.png"/>
+            <Label FontFamily="Consolas" Text="Логин" FontSize="Body" FontAttributes="Bold"/>
             <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
                 <VerticalStackLayout>
 
@@ -18,8 +19,8 @@
                 </VerticalStackLayout>
             </Frame>
             <VerticalStackLayout Padding="0" Margin="0,5,0,0">
-                <Label FontFamily="Consolas" Text="Password"/>
-                <Frame CornerRadius="10" Padding="3" Margin="0,10,0,0">
+                <Label Text="Пароль" FontSize="Body" FontAttributes="Bold"/>
+                <Frame CornerRadius="10" Padding="3" Margin="0,5,0,0">
                     <Entry x:Name="Password" Text="{Binding Password}" Margin="5,0,0,0" Placeholder="Пароль"
                                    IsPassword="True" FontSize="18">
                         <Entry.Behaviors>
@@ -31,10 +32,11 @@
 
 
             <Button Margin="0,20,0,0"
-                                x:Name="LoginButton"
-                                Command="{Binding LoginCommand}"
-                                Text="Вход" VerticalOptions="CenterAndExpand" 
-                                HorizontalOptions="FillAndExpand"/>
+                    x:Name="LoginButton"
+                    Command="{Binding LoginCommand}"
+                    FontAttributes="Bold"
+                    Text="Вход" VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="FillAndExpand"/>
 
             <BoxView Color="Black"
                                  Margin="0,20,0,0"
@@ -51,21 +53,14 @@
                     </Label.FormattedText>
                 </Label>
                 <Button Margin="0,20,0,0"
-                                x:Name="NavigateButton"
-                                Command="{Binding NavigateCommand}"
-                                Text="Регистрация" VerticalOptions="CenterAndExpand" 
-                                HorizontalOptions="FillAndExpand"/>
+                        x:Name="NavigateButton"
+                        Command="{Binding NavigateCommand}"
+                        FontAttributes="Bold"
+                        Text="Регистрация" VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="FillAndExpand"/>
             </VerticalStackLayout>
 
         </VerticalStackLayout>
         
-        <!--<Entry Placeholder="Username" Text="{Binding Username}"/>
-
-        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
-
-
-        <Button Text="Login" Command="{Binding LoginCommand}"/>
-        <Button Text="Registration" Command="{Binding NavigateCommand}"/>-->
-        <!--Background="black" TextColor="White"-->
     </VerticalStackLayout>
 </ContentPage>

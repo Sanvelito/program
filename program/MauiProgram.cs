@@ -2,7 +2,9 @@
 using program.Helpers;
 using program.Services;
 using program.ViewModels;
+using program.ViewModels.Admin;
 using program.ViewModels.User;
+using program.Views.Admin;
 using program.Views.User;
 using Refit;
 
@@ -23,6 +25,7 @@ public static class MauiProgram
             .UseMauiCommunityToolkit();
 
         builder.Services.AddTransient<AuthHeaderHandler>();
+        builder.Services.AddTransient<ImageResizer>();
 
         builder.Services
     .AddRefitClient<IApiAuthService>()
@@ -57,7 +60,15 @@ public static class MauiProgram
         builder.Services.AddTransient<UserAccountPage>();
         builder.Services.AddSingleton<UserAccountViewModel>();
 
+        //admin
+        builder.Services.AddTransient<AdminMainPage>();
+        builder.Services.AddSingleton<AdminMainViewModel>();
 
+        builder.Services.AddTransient<AdminManageCompanyPage>();
+        builder.Services.AddSingleton<AdminManageCompanyViewModel>();
+
+        builder.Services.AddTransient<DetailManageCompanyPage>();
+        builder.Services.AddSingleton<DetailManageCompanyViewModel>();
 
         var app = builder.Build();
 		return app;
