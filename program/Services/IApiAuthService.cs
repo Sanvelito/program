@@ -26,9 +26,24 @@ namespace program.Services
         Task<string> AddNewCompany([Body] CompanyDto requst);
         [Delete("/api/Company/{id}")]
         Task<string> DeleteCompany(int id);
-
+        [Get("/api/Company")]
+        Task<List<CompanyDto>> GetAllCompanies();
 
         //user
 
+        //manager
+        [Get("/api/Company/get-company-byname")]
+        Task<CompanyDto> GetCompanyByName([Query] string name);
+        //shit
+
+        //good
+        [Get("/api/Company/get-services-by-company")]
+        Task<List<ServiceDto>> GetServicesByCompany([Query] string name);
+        [Post("/api/Company/add-new-service")]
+        Task<string> AddNewService([Body] ServiceDto serviceDto);
+        [Post("/api/Company/update-service")]
+        Task<string> UpdateService([Body] ServiceDto serviceDto);
+        [Delete("/api/Company/delete-service")]
+        Task<string> DeleteService([Query] string companyName, string serviceName);
     }
 }

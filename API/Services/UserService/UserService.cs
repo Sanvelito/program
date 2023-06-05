@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Primitives;
 using API.Models.Dto;
 using API.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace API.Services.UserService
 {
@@ -37,7 +38,7 @@ namespace API.Services.UserService
                 Username = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             }
             var user = await _context.Users.FirstOrDefaultAsync(p => p.Username == Username);
-            return new UserInfoDto { Username = user.Username, FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber, Role = user.Role };
+            return new UserInfoDto { Username = user.Username, FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber, Role = user.Role, Manager = user.Manager };
         }
         
         public async Task<User> Register(RegisterDto request)
@@ -88,9 +89,6 @@ namespace API.Services.UserService
 
         public async Task<string> RefreshToken(string refreshTokenInSecure)
         {
-            //var jwt = new JwtSecurityToken(accessToken);
-            //string userName = jwt.Claims.First(c => c.Type == "name").Value;
-
             var user = await _context.Users.FirstOrDefaultAsync(p => p.RefreshToken == refreshTokenInSecure);
             if (!user.RefreshToken.Equals(refreshTokenInSecure))
             {
@@ -113,11 +111,11 @@ namespace API.Services.UserService
             var user = await _context.Users.FirstOrDefaultAsync(p => p.RefreshToken == refreshTokenInSecure);
             if (user is null)
             {
-                return new LoginDto { status = "notAuth" };
+                return new LoginDto { role = "notAuth" };
             }
             if (user.TokenExpires < DateTime.Now)
             {
-                return new LoginDto { status = "notAuth" };
+                return new LoginDto { role = "notAuth" };
             }
 
             string accessToken = CreateToken(user);
@@ -125,7 +123,7 @@ namespace API.Services.UserService
             string refreshToken = newRefreshToken.Token;
             await SetRefreshToken(user.Username, newRefreshToken);
 
-            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role, status = "Auth" };
+            return new LoginDto { accessToken = accessToken, refreshToken = refreshToken, role = user.Role, status = user.Manager };
         }
 
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -178,7 +176,7 @@ namespace API.Services.UserService
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(10),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds);
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
@@ -223,7 +221,7 @@ namespace API.Services.UserService
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<UserInfoDto> UpdateUserInfo(UserInfoDto request)
+        public async Task<string> UpdateUserInfo(UserInfoDto request)
         {
             var Username = string.Empty;
             if (_httpContextAccessor != null)
@@ -236,16 +234,92 @@ namespace API.Services.UserService
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.PhoneNumber = request.PhoneNumber;
-            if(request.Password != null) 
+            if(request.Password != string.Empty) 
             {
                 CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
                 user.PasswordSalt = passwordSalt;
                 user.PasswordHash = passwordHash;
             }
             await _context.SaveChangesAsync();
-            return new UserInfoDto { Username = user.Username, FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber, Role = user.Role };
+            return "success";
         }
         #endregion
 
+
+        #region Admin manager page
+
+        public async Task<List<UserInfoDto>> GetAllManagers()
+        {
+            var managers = await _context.Users.ToListAsync();
+            var result = new List<UserInfoDto>();
+
+            foreach (var manager in managers)
+            {
+                var userInfoDto = new UserInfoDto
+                {
+                    Username = manager.Username,
+                    FirstName = manager.FirstName,
+                    LastName = manager.LastName,
+                    PhoneNumber = manager.PhoneNumber,
+                    Role = manager.Role,
+                    Manager = manager.Manager
+                };
+                if(manager.Manager != string.Empty)
+                {
+                    result.Add(userInfoDto);
+                }
+                
+            }
+            return result;
+        }
+
+        public async Task<string> DeleteManager(UserInfoDto dto)
+        {
+            var manager = await _context.Users.FirstOrDefaultAsync(cs => cs.Username == dto.Username);
+            if (manager is null)
+                return "Manager not found";
+            _context.Users.Remove(manager);
+            await _context.SaveChangesAsync();
+            return "Success";
+        }
+        public async Task<string> UpdateManager(UserInfoDto dto)
+        {
+            var manager = await _context.Users.FirstOrDefaultAsync(cs => cs.Username == dto.Username);
+            if (manager is null)
+                return "Manager not found";
+            
+            manager.FirstName = dto.FirstName; 
+            manager.LastName = dto.LastName;
+            manager.PhoneNumber = dto.PhoneNumber;
+            manager.Manager = dto.Manager;
+
+            return "Success";
+        }
+        public async Task<string> AddNewManager(UserInfoDto dto)
+        {
+            var manager = await _context.Users.FirstOrDefaultAsync(cs => cs.Username == dto.Username);
+            if (manager != null)
+                return "Username already used";
+            User newManager = new User();
+            newManager.Username = dto.Username;
+            newManager.FirstName = dto.FirstName;
+            newManager.LastName = dto.LastName;
+            newManager.PhoneNumber = dto.PhoneNumber;
+            newManager.Role = "manager";
+            newManager.Manager = dto.Manager;
+
+            //password hashing
+            CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            newManager.PasswordSalt = passwordSalt;
+            newManager.PasswordHash = passwordHash;
+
+            _context.Users.Add(newManager);
+            await _context.SaveChangesAsync();
+            return "Success";
+        }
+
+
+
+        #endregion
     }
 }

@@ -16,6 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using program.Views;
 using program.Views.User;
 using program.Views.Admin;
+using program.Views.Manager;
 
 namespace program.ViewModels
 {
@@ -70,6 +71,11 @@ namespace program.ViewModels
                 if (response.role == "user")
                 {
                     await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+                }
+                if (response.role == "manager")
+                {
+                    await SecureStorage.SetAsync("manage_company", response.status);
+                    await Shell.Current.GoToAsync($"///{nameof(ManagerMainPage)}");
                 }
                 Password = string.Empty;
                 Username = string.Empty;

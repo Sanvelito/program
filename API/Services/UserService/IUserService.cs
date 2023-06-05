@@ -1,11 +1,13 @@
 ﻿using API.Models.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Services.UserService
 {
     public interface IUserService
     {
         Task<UserInfoDto> GetMyInfo();
-        Task<UserInfoDto> UpdateUserInfo(UserInfoDto request);
+        Task<string> UpdateUserInfo(UserInfoDto request);
+
         Task<User> Register(RegisterDto request);
         Task<LoginDto> Login(UserDto request);
         Task<string> RefreshToken(string refreshToken);
@@ -16,5 +18,11 @@ namespace API.Services.UserService
         Task<User> GetSingleUser(int id);
         Task<List<User>> UpdateUser(int id,UserDto user);
         Task<List<User>> DeleteUser(int id);
+
+
+        Task<List<UserInfoDto>> GetAllManagers();
+        Task<string> AddNewManager(UserInfoDto dto);
+        Task<string> DeleteManager(UserInfoDto dto);
+        Task<string> UpdateManager(UserInfoDto dto);
     }
 }

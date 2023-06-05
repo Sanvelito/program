@@ -14,7 +14,11 @@ public partial class UserCatalogPage : ContentPage
 		InitializeComponent();
         BindingContext = _ViewModel =vm;
     }
-
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _ViewModel.GetAllCompanies();
+    }
     void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         var company = e.SelectedItem as CompanyDto;

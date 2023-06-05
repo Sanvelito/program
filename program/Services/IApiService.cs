@@ -19,9 +19,6 @@ namespace program.Services
         //[Post("/api/Auth/register")]
         //Task<RegisterDto> Register([Body] RegisterDto request);
 
-        [Get("/api/Company")]
-        Task<List<CompanyDto>> GetAllCompanies();
-
         [Headers("Authorization: Bearer")]
         [Post("/api/Customer")]
         Task<CustomerServiceDto> AddCustomerService([Body] CustomerServiceDto request);
@@ -31,11 +28,25 @@ namespace program.Services
         Task<UserInfoDto> GetMyInfo();
 
         [Headers("Authorization: Bearer")]
-        [Put("/api/User")]
-        Task<UserInfoDto> UpdateUserInfo([Body] UserInfoDto request);
+        [Post("/api/User/update-myinfo")]
+        Task<string> UpdateUserInfo([Body] UserInfoDto request);
 
         [Headers("Authorization: Bearer")]
         [Get("/api/Customer")]
         Task<List<CustomerServiceDto>> GetUserOrders();
+
+        //admin manager control
+        [Headers("Authorization: Bearer")]
+        [Get("/api/User/get-all-managers")]
+        Task<List<UserInfoDto>> GetAllManagers();
+        [Headers("Authorization: Bearer")]
+        [Post("/api/User/add-new-manager")]
+        Task<string> AddNewManager([Body] UserInfoDto request);
+        [Headers("Authorization: Bearer")]
+        [Post("/api/User/update-manager")]
+        Task<string> UpdateManager([Body] UserInfoDto request);
+        [Headers("Authorization: Bearer")]
+        [Delete("/api/User/delete-manager")]
+        Task<string> DeleteManager([Body] UserInfoDto request);
     }
 }

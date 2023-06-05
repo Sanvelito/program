@@ -16,7 +16,7 @@ namespace program.ViewModels.User
 {
     public partial class UserCatalogViewModel : ObservableObject
     {
-        private readonly IApiService _ApiService;
+        private readonly IApiAuthService _ApiService;
         
 
         [ObservableProperty]
@@ -26,12 +26,11 @@ namespace program.ViewModels.User
         CompanyDto companyDto;
 
         IConnectivity connectivity;
-        public UserCatalogViewModel(IConnectivity connectivity, IApiService apiService)
+        public UserCatalogViewModel(IConnectivity connectivity, IApiAuthService apiService)
         {
             this.connectivity = connectivity;
             // Инициализация Refit для работы с API
             _ApiService = apiService;
-            GetAllCompanies();
         }
 
         [RelayCommand]
@@ -58,10 +57,5 @@ namespace program.ViewModels.User
                         ["CompanyDto"] = CompanyDto
                     });
         }
-
-    // Дополнительные действия, если необходимо
-    // Сбросить выбор элемента в списке
-    //((ListView)sender).SelectedItem = null;
-
-}
+    }
 }

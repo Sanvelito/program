@@ -8,6 +8,6 @@
         <ActivityIndicator Color="{StaticResource Primary}"
                                IsRunning="True" HeightRequest="50" WidthRequest="50"
                                IsVisible="True" />
-        <Label Text="Checking authentication..." HorizontalOptions="Center" />
+        <Label Text="Аутентификация..." HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

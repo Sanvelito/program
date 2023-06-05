@@ -9,31 +9,18 @@ namespace program.Views;
 public partial class LoadingPage : ContentPage
 {
 
-    //LoadingViewModel loadingViewModel;
-    public LoadingPage()
+    LoadingViewModel _ViewModel;
+    public LoadingPage(LoadingViewModel vm)
 	{
         InitializeComponent();
-        BindingContext = ServiceHelper.GetService<LoadingViewModel>();
+        BindingContext = _ViewModel = vm;
 
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        LoginDto loginDto = await ServiceHelper.GetService<LoadingViewModel>().isAuthenticatedAsync();
-        if (loginDto.status == "notAuth")
-        {
-            await Shell.Current.GoToAsync(nameof(LoginPage));
-        }
-        else if (loginDto.role == "admin")
-        {
-            await Shell.Current.GoToAsync($"///{nameof(AdminMainPage)}");
-        }
-        else if (loginDto.role == "user")
-        {
-            await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
-        }
+        _ViewModel.Navigate();
     }
 
 }

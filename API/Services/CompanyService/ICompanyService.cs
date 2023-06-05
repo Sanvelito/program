@@ -1,7 +1,7 @@
 ﻿using API.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Services.CompanyService
+namespace API.Services.CompService
 {
     public interface ICompanyService
     {
@@ -10,5 +10,13 @@ namespace API.Services.CompanyService
         Task<string> UpdateCompany(CompanyDto companyDto);
         Task<string> AddNewCompany(CompanyDto companyDto);
         Task<string> DeleteCompany(int id);
+
+
+        Task<CompanyDto> GetCompanyByName(string name);
+        Task<List<ServiceDto>> GetServicesByCompany(string name);
+        Task<string> AddNewService(ServiceDto serviceDto);
+        Task<string> UpdateService(ServiceDto serviceDto);
+        Task<string> DeleteService(string companyName, string serviceName);
+        
     }
 }

@@ -7,6 +7,7 @@
     xmlns:views="clr-namespace:program.Views"
     xmlns:viewsUser="clr-namespace:program.Views.User"
     xmlns:viewsAdmin="clr-namespace:program.Views.Admin"
+    xmlns:viewsManager="clr-namespace:program.Views.Manager"
     Shell.FlyoutBehavior="Disabled">
     
     <!--xmlns:viewsManager="clr-namespace:program.Views.Manager"-->
@@ -25,17 +26,50 @@
     
     <!--Admin Pages-->
     <TabBar>
-        <Tab Title="Admin">
+        <Tab Title="Главная">
             <ShellContent
-            Title="Admin"
+            Title="Главная"
             ContentTemplate="{DataTemplate viewsAdmin:AdminMainPage}"
             Route="AdminMainPage" />
         </Tab>
-        <Tab Title="Company">
+        <Tab Title="Компании">
             <ShellContent
             Title="Company"
             ContentTemplate="{DataTemplate viewsAdmin:AdminManageCompanyPage}"
             Route="AdminManageCompanyPage" />
+        </Tab>
+        <Tab Title="Менеджеры">
+            <ShellContent
+            Title="Manager"
+            ContentTemplate="{DataTemplate viewsAdmin:AdminManagerControlPage}"
+            Route="AdminManagerControlPage" />
+        </Tab>
+    </TabBar>
+    <!--Manager Pages-->
+    <TabBar>
+        <Tab Title="Главная">
+            <ShellContent
+            Title="Главная"
+            ContentTemplate="{DataTemplate viewsManager:ManagerMainPage}"
+            Route="ManagerMainPage" />
+        </Tab>
+        <Tab Title="Услуги">
+            <ShellContent
+            Title="Услуги"
+            ContentTemplate="{DataTemplate viewsManager:ManagerServicePage}"
+            Route="ManagerServicePage" />
+        </Tab>
+        <Tab Title="Заказы">
+            <ShellContent
+            Title="Заказы"
+            ContentTemplate="{DataTemplate viewsManager:ManagerOrderPage}"
+            Route="ManagerOrderPage" />
+        </Tab>
+        <Tab Title="Компания">
+            <ShellContent
+            Title="Компания"
+            ContentTemplate="{DataTemplate viewsManager:ManagerCompanyPage}"
+            Route="ManagerCompanyPage" />
         </Tab>
     </TabBar>
     <!--User Pages-->
@@ -51,9 +85,9 @@
             Title="Каталог"
             ContentTemplate="{DataTemplate viewsUser:UserCatalogPage}"/>
         </Tab>
-        <Tab Title="Чат" Icon="chat.png">
+        <Tab Title="Заказы" Icon="chat.png">
             <ShellContent
-            Title="Чат"
+            Title="Заказы"
             ContentTemplate="{DataTemplate viewsUser:UserChatPage}"/>
         </Tab>
         <Tab Title="Профиль" Icon="account.png">

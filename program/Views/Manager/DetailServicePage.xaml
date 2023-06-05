@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="program.Views.Manager.DetailServicePage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:program.ViewModels.Manager"
+             x:DataType="viewmodel:DetailServiceViewModel"
+             Title="DetailServicePage">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout Margin="20">
+        <!--<Image Source="{Binding CompanyDto.CompanyImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" />-->
+        <Label Text="Компания" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Компания" Text="{Binding CompanyName}" Margin="5,0,0,0" FontSize="16" IsEnabled="False"/>
+        </Border>
+        <Label Text="Категория" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Категория" Text="{Binding GroupName}" Margin="5,0,0,0" FontSize="16"/>
+        </Border>
+        <Label Text="Услуга" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Услуга" Text="{Binding ServiceName}" Margin="5,0,0,0" FontSize="16"/>
+        </Border>
+        <Label Text="Описание" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Описание" Text="{Binding Description}" Margin="5,0,0,0" FontSize="16"/>
+        </Border>
+        <Label Text="Цена" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry x:Name="Price" Text="{Binding Price}" Margin="5,0,0,0" Placeholder="Цена" 
+                           Keyboard="Numeric"
+                           FontSize="16">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged"/>
+                </Entry.Behaviors>
+            </Entry>
+        </Border>
+        
+
+        <BoxView Color="Black"
+                 Margin="0,10,0,10"
+                 HeightRequest="2"
+                 HorizontalOptions="Fill" />
+        <Button Text="Обновить" Command="{Binding UpdateServiceCommand}" IsVisible="{Binding UpdateButtonVisible}"/>
+        <Button Text="Добавить" Command="{Binding AddNewServiceCommand}" IsVisible="{Binding AddButtonVisible}" Margin="0,5,0,0"/>
+        <Button Text="Удалить" Command="{Binding DeleteServiceCommand}" IsVisible="{Binding DeleteButtonVisible}" Margin="0,5,0,0" BackgroundColor="PaleVioletRed"/>
+    </VerticalStackLayout>
+</ContentPage>

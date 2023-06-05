@@ -3,8 +3,11 @@ using program.Helpers;
 using program.Services;
 using program.ViewModels;
 using program.ViewModels.Admin;
+using program.ViewModels.Manager;
 using program.ViewModels.User;
+using program.Views;
 using program.Views.Admin;
+using program.Views.Manager;
 using program.Views.User;
 using Refit;
 
@@ -37,9 +40,11 @@ public static class MauiProgram
     .AddHttpMessageHandler<AuthHeaderHandler>();
 
         builder.Services.AddSingleton<IConnectivity>((e) => Connectivity.Current);
-        
 
+        //loading 
+        builder.Services.AddTransient<LoadingPage>();
         builder.Services.AddSingleton<LoadingViewModel>();
+
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<RegistrationViewModel>();
         builder.Services.AddSingleton<UserViewModel>();
@@ -72,6 +77,31 @@ public static class MauiProgram
 
         builder.Services.AddTransient<DetailManageCompanyPage>();
         builder.Services.AddSingleton<DetailManageCompanyViewModel>();
+
+        //admin manager
+        builder.Services.AddTransient<AdminManagerControlPage>();
+        builder.Services.AddSingleton<AdminManagerControlViewModel>();
+
+        builder.Services.AddTransient<DetailControlManagerPage>();
+        builder.Services.AddSingleton<DetailControlManagerViewModel>();
+
+
+        //manager
+        builder.Services.AddTransient<ManagerMainPage>();
+        builder.Services.AddSingleton<ManagerMainViewModel>();
+
+        //service
+        builder.Services.AddTransient<ManagerServicePage>();
+        builder.Services.AddSingleton<ManagerServiceViewModel>();
+
+        builder.Services.AddTransient<DetailServicePage>();
+        builder.Services.AddSingleton<DetailServiceViewModel>();
+
+        builder.Services.AddTransient<ManagerOrderPage>();
+        builder.Services.AddSingleton<ManagerOrderViewModel>();
+
+        builder.Services.AddTransient<ManagerCompanyPage>();
+        builder.Services.AddSingleton<ManagerCompanyViewModel>();
 
         var app = builder.Build();
 		return app;

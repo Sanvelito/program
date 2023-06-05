@@ -23,7 +23,7 @@ namespace program.Helpers
             var accessToken = await SecureStorage.GetAsync("access_token");
             var refreshToken = await SecureStorage.GetAsync("refresh_token");
 
-            //potentially refresh token here if it has expired etc.
+            //refresh token 
             DateTime expirationDate = GetTokenExpirationDate(accessToken);
             if (expirationDate <= DateTime.Now)
             {

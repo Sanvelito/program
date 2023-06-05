@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-using API.Services.CompanyService;
+using API.Services.CompService;
 using API.Services.CustService;
 
 var builder = WebApplication.CreateBuilder(args);

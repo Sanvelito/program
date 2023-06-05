@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="program.Views.Admin.AdminManagerControlPage"
+             Title="Список Менеджеров">
+    <StackLayout>
+        <ListView ItemsSource="{Binding Managers}"
+                  ItemSelected="ListView_ItemSelected"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  Margin="0,0,0,5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Border HeightRequest="100" Margin="10,2.5,10,2.5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+                                <Grid Padding="0">
+                                    <StackLayout VerticalOptions="Center" Margin="5,0,0,0">
+                                        <Label FontSize="Large" Text="{Binding Manager}" FontAttributes="Bold"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label FontSize="16" Text="Login: " />
+                                            <Label FontSize="16" Text="{Binding Username}" />
+                                        </StackLayout>
+                                        
+                                        <Label FontSize="16" Text="{Binding FirstName}" />
+                                        <Label FontSize="16" Text="{Binding LastName}" />
+                                    </StackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Обновить" Command="{Binding RefreshCommand}" Margin="5"/>
+        <Button Text="Новый менеджер" Command="{Binding AddNewManagerCommand}" Margin="5,0,5,0"/>
+    </StackLayout>
+</ContentPage>

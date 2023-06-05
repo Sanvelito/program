@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="program.Views.Manager.ManagerServicePage"
+             Title="Список услуг">
+    <StackLayout>
+        <ListView ItemsSource="{Binding Services}"
+                  ItemSelected="ListView_ItemSelected"
+                  SeparatorVisibility="None"
+                  HasUnevenRows="True"
+                  Margin="0,0,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Border HeightRequest="100" Margin="10,2.5,10,2.5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+                                <Grid Padding="0" ColumnSpacing="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="130" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding GroupName}" FontSize="16" Margin="5" FontAttributes="Bold"/>
+                                    <StackLayout
+                                    Grid.Column="1" 
+                                    VerticalOptions="Center">
+                                        <Label FontSize="16" Text="{Binding ServiceName}" FontAttributes="Bold"/>
+                                        <Label FontSize="16" Text="{Binding Description}" />
+                                        <Label FontSize="16" Text="{Binding Price}" />
+                                    </StackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Обновить" Command="{Binding RefreshCommand}" Margin="5"/>
+        <Button Text="Новая услуга" Command="{Binding AddNewServiceCommand}" Margin="5,0,5,0"/>
+    </StackLayout>
+</ContentPage>

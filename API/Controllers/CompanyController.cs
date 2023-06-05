@@ -1,5 +1,5 @@
 ﻿using API.Models.Dto;
-using API.Services.CompanyService;
+using API.Services.CompService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +46,37 @@ namespace API.Controllers
         public async Task<ActionResult<string>> AddNewCompany(CompanyDto companyDto)
         {
             var result = await _CompanyService.AddNewCompany(companyDto);
+            return Ok(result);
+        }
+
+        [HttpGet("get-company-byname")]
+        public async Task<ActionResult<CompanyDto>> GetCompanyByName(string name)
+        {
+            var result = await _CompanyService.GetCompanyByName(name);
+            return Ok(result);
+        }
+        [HttpGet("get-services-by-company")]
+        public async Task<ActionResult<List<ServiceDto>>> GetServicesByCompany(string name)
+        {
+            var result = await _CompanyService.GetServicesByCompany(name);
+            return Ok(result);
+        }
+        [HttpPost("add-new-service")]
+        public async Task<ActionResult<string>> AddNewService(ServiceDto serviceDto)
+        {
+            var result = await _CompanyService.AddNewService(serviceDto);
+            return Ok(result);
+        }
+        [HttpPost("update-service")]
+        public async Task<ActionResult<string>> UpdateService(ServiceDto serviceDto)
+        {
+            var result = await _CompanyService.UpdateService(serviceDto);
+            return Ok(result);
+        }
+        [HttpDelete("delete-service")]
+        public async Task<ActionResult<string>> DeleteService(string companyName, string serviceName)
+        {
+            var result = await _CompanyService.DeleteService(companyName, serviceName);
             return Ok(result);
         }
     }

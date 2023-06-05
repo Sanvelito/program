@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using program.Helpers;
 using System.Text.RegularExpressions;
+using CommunityToolkit.Maui.Converters;
 
 namespace program.ViewModels.Admin
 {
@@ -82,6 +83,22 @@ namespace program.ViewModels.Admin
         {
             try
             {
+                string numberString = CompanyPhoneNumber.ToString();
+                if (numberString.Length != 12)
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен номер!", "OK");
+                    return false;
+                }
+                if (IsValidEmail(CompanyEmail) == false)
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен email!", "OK");
+                    return false;
+                }
+                if (string.IsNullOrEmpty(CompanyName) || string.IsNullOrEmpty(CompanyEmail))
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
+                    return false;
+                }
                 var newCompanyInfo = await _apiService.UpdateCompany(new CompanyDto
                 {
                     Id = CompanyDto.Id,
@@ -114,6 +131,11 @@ namespace program.ViewModels.Admin
                 if(IsValidEmail(CompanyEmail) == false)
                 {
                     await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен email!", "OK");
+                    return false;
+                }
+                if (string.IsNullOrEmpty(CompanyName) || string.IsNullOrEmpty(CompanyEmail))
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 var info = await _apiService.AddNewCompany(new CompanyDto

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="program.Views.Admin.DetailControlManagerPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:program.ViewModels.Admin"
+             x:DataType="viewmodel:DetailControlManagerViewModel"
+             Title="DetailControlManagerPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout Margin="20">
+
+        <Label Text="Username" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="Username" Text="{Binding Username}" Margin="5,0,0,0" FontSize="16" IsEnabled="{Binding EntryIsEnabled}"/>
+        </Border>
+        <Label Text="Пароль" FontSize="Body" FontAttributes="Bold" IsVisible="{Binding PasswordEntryVisable}"/>
+        <Border Padding="2" IsVisible="{Binding PasswordEntryVisable}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry x:Name="Password" Text="{Binding Password}" Margin="5,0,0,0" Placeholder="Пароль"
+                                   IsPassword="True" FontSize="18">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="6"
+                                MaximumLength="30" />
+                </Entry.Behaviors>
+            </Entry>
+        </Border>
+        <Label Text="FirstName" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="FirstName" Text="{Binding FirstName}" Margin="5,0,0,0" FontSize="16"/>
+        </Border>
+        <Label Text="LastName" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry Placeholder="LastName" Text="{Binding LastName}" Margin="5,0,0,0" FontSize="16"/>
+        </Border>
+        <Label Text="Номер телефона" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Entry x:Name="PhoneNumber" Text="{Binding PhoneNumber}" Margin="5,0,0,0" Placeholder="Номер телефона" 
+                           Keyboard="Telephone" MaxLength="12"
+                           FontSize="16">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged"/>
+                </Entry.Behaviors>
+            </Entry>
+        </Border>
+        <Label Text="Status" FontSize="Body" FontAttributes="Bold"/>
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <Label Text="{Binding Role}" Margin="5,0,0,0" FontSize="16"/>
+        </Border>
+        <Label Text="Компания" FontSize="Body" FontAttributes="Bold"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Текущая: "/>
+            <Label Text="{Binding Manager} "/>
+        </StackLayout>
+        
+        <Border Padding="2" >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <StackLayout>
+                
+                <Picker x:Name="companyPicker"
+                Title="Выберете компанию"
+                VerticalOptions="CenterAndExpand"
+                SelectedIndexChanged="PickerKeySelectedIndexChanged"
+                ItemsSource="{Binding Keys}">
+                </Picker>
+            </StackLayout>
+        </Border>
+
+        <BoxView Color="Black"
+                 Margin="0,10,0,10"
+                 HeightRequest="2"
+                 HorizontalOptions="Fill" />
+        
+        <Button Text="Обновить" Command="{Binding UpdateManagerCommand}" IsVisible="{Binding UpdateButtonVisible}"/>
+        <Button Text="Добавить" Command="{Binding AddNewManagerCommand}" IsVisible="{Binding AddButtonVisible}" Margin="0,5,0,0"/>
+        <Button Text="Удалить" Command="{Binding DeleteManagerCommand}" IsVisible="{Binding DeleteButtonVisible}" Margin="0,5,0,0" BackgroundColor="PaleVioletRed"/>
+    </VerticalStackLayout>
+</ContentPage>

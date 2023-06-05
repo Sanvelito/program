@@ -1,6 +1,9 @@
 ﻿using program.Models;
 using program.Services;
 using program.Views;
+using program.Views.Admin;
+using program.Views.Manager;
+using program.Views.User;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -17,8 +20,8 @@ namespace program.ViewModels
         {
             _ApiService = apiService;
         }
-        
-        public async Task<LoginDto> isAuthenticatedAsync()
+
+        public async Task<LoginDto> IsAuthenticatedAsync()
         {
             //await Task.Delay(2000);
 
@@ -27,14 +30,14 @@ namespace program.ViewModels
             {
                 if (string.IsNullOrEmpty(refreshTokenInSecure)) 
                 { 
-                    return new LoginDto { status = "notAuth" }; 
+                    return new LoginDto { role = "notAuth" }; 
                 }
 
                 LoginDto response = await _ApiService.CheckAuth(refreshTokenInSecure);
 
                 await SecureStorage.SetAsync("access_token", response.accessToken);
                 await SecureStorage.SetAsync("refresh_token", response.refreshToken);
-
+                await SecureStorage.SetAsync("manage_company", response.status);
                 return response;
             }
             catch (Exception ex)
@@ -45,6 +48,27 @@ namespace program.ViewModels
                 return new LoginDto { status = "notAuth" };
             }
             //return false;
+        }
+        public async Task Navigate()
+        {
+            LoginDto loginDto = await IsAuthenticatedAsync();
+
+            if (loginDto.role == "notAuth")
+            {
+                await Shell.Current.GoToAsync(nameof(LoginPage));
+            }
+            else if (loginDto.role == "admin")
+            {
+                await Shell.Current.GoToAsync($"///{nameof(AdminMainPage)}");
+            }
+            else if (loginDto.role == "user")
+            {
+                await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
+            }
+            else if (loginDto.role == "manager")
+            {
+                await Shell.Current.GoToAsync($"///{nameof(ManagerMainPage)}");
+            }
         }
     }
 }

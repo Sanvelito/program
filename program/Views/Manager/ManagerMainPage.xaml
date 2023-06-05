@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="program.Views.Admin.AdminMainPage"
+             x:Class="program.Views.Manager.ManagerMainPage"
              Title="Главная">
     <StackLayout>
-        <Label Text="Добро пожаловать Администратор!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+        <Label Text="Добро пожаловать Менеджер!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
         <Button Text="Выйти" Command="{Binding LogoutCommand}" Margin="10" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
     </StackLayout>
 </ContentPage>

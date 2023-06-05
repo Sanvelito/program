@@ -70,22 +70,34 @@ namespace program.ViewModels.User
                     await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен номер!", "OK");
                     return false;
                 }
-                if(Password.Length < 6)
+                if (!string.IsNullOrEmpty(Password))
                 {
-                    await App.Current.MainPage.DisplayAlert("Упс!", $"Длинна пароля должна быть больше 5 символов!", "OK");
-                    return false;
+                    if (Password.Length < 6)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Упс!", $"Длинна пароля должна быть больше 5 символов!", "OK");
+                        return false;
+                    }
                 }
-                if (FirstName == null || LastName == null )
+                else
+                {
+                    Password = "";
+                }
+                
+                if (string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName))
                 {
                     await App.Current.MainPage.DisplayAlert("Упс!", "Одно из полей введено некоректно", "OK");
                     return false;
                 }
+                await App.Current.MainPage.DisplayAlert("Готово!", $"{FirstName}, {LastName}, {PhoneNumber}", "OK");
                 var response = await _ApiService.UpdateUserInfo(new UserInfoDto
                 {
+                    Username = "user",
                     FirstName = FirstName,
                     LastName = LastName,
                     PhoneNumber = PhoneNumber,
-                    Password = Password
+                    Password = Password,
+                    Role = "user",
+                    Manager = ""
                 });
                 await App.Current.MainPage.DisplayAlert("Готово!", "Данные обновлены!", "OK");
                 return true;

@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using program.Models;
 using program.Services;
 using program.Views.Admin;
-using program.Views.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,31 +12,29 @@ using System.Threading.Tasks;
 
 namespace program.ViewModels.Admin
 {
-    public partial class AdminManageCompanyViewModel : ObservableObject
+    public partial class AdminManagerControlViewModel : ObservableObject
     {
-        private readonly IApiAuthService _ApiService;
-
+        [ObservableProperty]
+        ObservableCollection<UserInfoDto> managers;
 
         [ObservableProperty]
-        ObservableCollection<CompanyDto> companies;
+        UserInfoDto userInfoDto;
 
-        [ObservableProperty]
-        CompanyDto companyDto;
-
+        private readonly IApiService _ApiService;
         IConnectivity connectivity;
-        public AdminManageCompanyViewModel(IConnectivity connectivity, IApiAuthService apiService)
+        public AdminManagerControlViewModel(IConnectivity connectivity, IApiService apiService)
         {
             this.connectivity = connectivity;
             // Инициализация Refit для работы с API
             _ApiService = apiService;
         }
         [RelayCommand]
-        public async Task GetAllCompanies()
+        public async Task GetAllManagers()
         {
             try
             {
-                List<CompanyDto> comps = await _ApiService.GetAllCompanies();
-                Companies = new ObservableCollection<CompanyDto>(comps);
+                List<UserInfoDto> managers = await _ApiService.GetAllManagers();
+                Managers = new ObservableCollection<UserInfoDto>(managers);
             }
             catch (Exception ex)
             {
@@ -49,26 +46,26 @@ namespace program.ViewModels.Admin
         [RelayCommand]
         public async Task Refresh()
         {
-            Companies = null;
-            await GetAllCompanies();
+            Managers = null;
+            await GetAllManagers();
         }
         [RelayCommand]
-        public async Task AddNewCompany()
+        public async Task AddNewManager()
         {
-            CompanyDto = new CompanyDto { CompanyEmail = string.Empty, CompanyName = string.Empty, CompanyPhoneNumber = 0, CompanyImage = new byte[0] };
-            await Shell.Current.GoToAsync($"{nameof(DetailManageCompanyPage)}",
+            UserInfoDto = new UserInfoDto { Username = string.Empty, FirstName = string.Empty, LastName = string.Empty, PhoneNumber = 0, Role = "manager", Manager = string.Empty, Password = string.Empty};
+            await Shell.Current.GoToAsync($"{nameof(DetailControlManagerPage)}",
                     new Dictionary<string, object>
                     {
-                        ["CompanyDto"] = CompanyDto
+                        ["UserInfoDto"] = UserInfoDto
                     });
         }
-        public async void ItemSelected(CompanyDto companyDto)
+        public async void ItemSelected(UserInfoDto userInfoDto)
         {
-            CompanyDto = companyDto;
-            await Shell.Current.GoToAsync($"{nameof(DetailManageCompanyPage)}",
+            UserInfoDto = userInfoDto;
+            await Shell.Current.GoToAsync($"{nameof(DetailControlManagerPage)}",
                     new Dictionary<string, object>
                     {
-                        ["CompanyDto"] = CompanyDto
+                        ["UserInfoDto"] = UserInfoDto
                     });
         }
     }

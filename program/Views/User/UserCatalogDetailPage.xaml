@@ -22,15 +22,15 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <BoxView
-                    Grid.ColumnSpan="3"
                     Color="{StaticResource Primary}"
+                    Grid.ColumnSpan="3"
                     HeightRequest="80"
                     HorizontalOptions="FillAndExpand" />
                 <StackLayout
                     Grid.RowSpan="2"
                     Grid.Column="1"
                     Margin="0,25,0,0">
-                    <Image Grid.Column="0" Source="{Binding CompanyDto.CompanyImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
+                    <Image Source="{Binding CompanyDto.CompanyImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
                            MaximumWidthRequest="100" MaximumHeightRequest="100" Margin="5,0,0,0"/>
                     
                 </StackLayout>
@@ -57,7 +57,6 @@
             <Button
                 Margin="5"
                 HorizontalOptions="Center"
-                Style="{StaticResource ButtonOutline}"
                 Text="Заказать"
                 Command="{Binding CreateOrderCommand}"
                 WidthRequest="200" />

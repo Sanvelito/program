@@ -45,8 +45,6 @@ public partial class CreateOrderPage : ContentPage
         if(servicePicker.SelectedItem != null)
         {
             _viewModel.ServiceName = (servicePicker.SelectedItem).ToString();
-        }
-        
-        
+        }  
     }
 }

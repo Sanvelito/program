@@ -115,11 +115,14 @@ namespace program.ViewModels.User
         {
             try
             {
-                await App.Current.MainPage.DisplayAlert("ИМЯ", $"{SelectedDateTime}", "OK");
                 if (SelectedDateTime <= DateTime.Now || Address == null || ServiceName == null)
                 {
                     await App.Current.MainPage.DisplayAlert("Упс!", "Введены некоректные данные", "OK");
                     return false;
+                }
+                if(string.IsNullOrEmpty(Description))
+                {
+                    Description = string.Empty;
                 }
                 CustomerServiceDto response = await _ApiService.AddCustomerService(new CustomerServiceDto
                 {
@@ -134,6 +137,7 @@ namespace program.ViewModels.User
                     Address = Address,
                     Status = "Ожидание ответа исполнителя"
                 });
+                await Shell.Current.GoToAsync("../..");
                 await App.Current.MainPage.DisplayAlert("Yes!", "Заказ составлен", "OK");
                 return true;
             }
