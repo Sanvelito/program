@@ -1,4 +1,5 @@
 ﻿using API.Models.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Services.CustService
 {
@@ -8,5 +9,7 @@ namespace API.Services.CustService
         Task<List<CustomerServiceDto>> GetCustomerOrders();
         Task<CustomerServiceDto> AddCustomerService(CustomerServiceDto dto);
         Task<List<CustomerServiceDto>> GetUserOrders();
+        Task<List<CustomerServiceDto>> GetCompanyOrders(string name);
+        Task<string> UpdateOrder(CustomerServiceDto dto);
     }
 }

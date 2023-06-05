@@ -130,5 +130,60 @@ namespace API.Services.CustService
 
             return result;
         }
+        public async Task<List<CustomerServiceDto>> GetCompanyOrders(string name)
+        {
+
+            var customerServices = await _context.CustomerServices
+            .Include(cs => cs.User)
+            .Include(cs => cs.CompanyService)
+            .ThenInclude(cs => cs.Service)
+            .Where(cs => cs.CompanyName == name)
+            .ToListAsync();
+
+            var result = customerServices.Select(cs => new CustomerServiceDto
+            {
+                Id = cs.Id,
+                Username = cs.User.Username,
+                FirstName = cs.User.FirstName,
+                LastName = cs.User.LastName,
+                PhoneNumber = cs.User.PhoneNumber,
+                CompanyName = cs.CompanyName,
+                CreatedDate = cs.CreatedDate,
+                ServiceName = cs.CompanyService.Service.Name,
+                DeadLine = cs.DeadLine,
+                Description = cs.Description,
+                Address = cs.Address,
+                Status = cs.Status
+            }).ToList();
+
+            return result;
+        }
+        public async Task<string> UpdateOrder(CustomerServiceDto customerServiceDto)
+        {
+            var customerService = await _context.CustomerServices.FirstOrDefaultAsync(cs => cs.Id == customerServiceDto.Id);
+
+            if (customerService == null)
+                return null;
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == customerServiceDto.Username);
+            var companyService = await _context.CompanyServices.FirstOrDefaultAsync(cs => cs.Service.Name == customerServiceDto.ServiceName);
+
+            if (user == null || companyService == null)
+                return null;
+
+            customerService.User = user;
+            customerService.CompanyName = customerServiceDto.CompanyName;
+            customerService.CompanyService = companyService;
+            customerService.CreatedDate = customerServiceDto.CreatedDate;
+            customerService.DeadLine = customerServiceDto.DeadLine;
+            customerService.Description = customerServiceDto.Description;
+            customerService.Address = customerServiceDto.Address;
+            customerService.Status = customerServiceDto.Status;
+
+            await _context.SaveChangesAsync();
+
+            return "success";
+        }
+
     }
 }

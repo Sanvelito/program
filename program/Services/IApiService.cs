@@ -48,5 +48,14 @@ namespace program.Services
         [Headers("Authorization: Bearer")]
         [Delete("/api/User/delete-manager")]
         Task<string> DeleteManager([Body] UserInfoDto request);
+
+        //manager
+        [Headers("Authorization: Bearer")]
+        [Get("/api/Customer/get-company-orders")]
+        Task<List<CustomerServiceDto>> GetCompanyOrders([Query] string name);
+
+        [Headers("Authorization: Bearer")]
+        [Post("/api/Customer/update-order")]
+        Task<string> UpdateOrder([Body] CustomerServiceDto request);
     }
 }

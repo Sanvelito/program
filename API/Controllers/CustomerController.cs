@@ -47,5 +47,21 @@ namespace API.Controllers
             var result = await _CustomerService.GetUserOrders();
             return Ok(result);
         }
+        [HttpGet("get-company-orders")]
+        [Authorize (Roles = "manager")]
+        public async Task<ActionResult<List<CustomerServiceDto>>> GetCompanyOrders(string name)
+        {
+            var result = await _CustomerService.GetCompanyOrders(name);
+            if(result == null)
+                return BadRequest("Something gone wrong");
+            return Ok(result);
+        }
+        [HttpPost("update-order")]
+        [Authorize(Roles = "manager")]
+        public async Task<ActionResult<string>> UpdateOrder(CustomerServiceDto dto)
+        {
+            var result = await _CustomerService.UpdateOrder(dto);
+            return Ok(result);
+        }
     }
 }
