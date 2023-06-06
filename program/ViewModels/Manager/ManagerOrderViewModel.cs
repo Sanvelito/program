@@ -71,7 +71,8 @@ namespace program.ViewModels.Manager
                 });
         
     
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", $"Выполнено!", "OK");
+                RefreshSelected();
                 Refresh();
                 return true;
             }
@@ -105,7 +106,8 @@ namespace program.ViewModels.Manager
                 });
 
 
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", $"Выполнено!", "OK");
+                RefreshSelected();
                 Refresh();
                 return true;
             }
@@ -140,7 +142,8 @@ namespace program.ViewModels.Manager
                 });
 
 
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await App.Current.MainPage.DisplayAlert("Alert", $"Выполнено!", "OK");
+                RefreshSelected();
                 Refresh();
                 return true;
             }
@@ -153,7 +156,12 @@ namespace program.ViewModels.Manager
         }
         public void ItemSelected(CustomerServiceDto customerServiceDto)
         {
+            CustomerServiceDto = null;
             CustomerServiceDto = customerServiceDto;
+        }
+        public void RefreshSelected()
+        {
+            CustomerServiceDto = null;
         }
         public async Task Refresh()
         {

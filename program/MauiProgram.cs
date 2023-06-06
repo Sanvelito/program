@@ -47,8 +47,6 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<RegistrationViewModel>();
-        builder.Services.AddSingleton<UserViewModel>();
-        builder.Services.AddSingleton<AdminViewModel>();
 
         //user catalog page
         builder.Services.AddSingleton<UserCatalogViewModel>();

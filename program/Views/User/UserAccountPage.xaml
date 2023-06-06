@@ -77,6 +77,8 @@
             <Button Text="Обновить информацию" Command="{Binding UpdateUserInfoCommand}" HorizontalOptions="Center" />
 
             <Button Text="Выход" Command="{Binding LogoutCommand}" HorizontalOptions="Center"  />
+            <Button Text="О программе" Clicked="GetInfoAbout" HorizontalOptions="Center"  />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -18,48 +18,12 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        [HttpGet("Get-all-users"), Authorize(Roles = "admin")]
-        public async Task<ActionResult<List<User>>> GetAllUsers()
-        {
-            return await _userService.GetAllUsers();
-        }
-
-        [HttpGet("{id}"), Authorize(Roles = "admin")]
-        public async Task<ActionResult<User>> GetSingleUser(int id)
-        {
-            var result = await _userService.GetSingleUser(id);
-            if (result is null)
-                return NotFound("User not found.");
-
-            return Ok(result);
-        }
-
-        [HttpPut("{id}"), Authorize(Roles = "admin")]
-        public async Task<ActionResult<List<User>>> UpdateUser(int id, UserDto request)
-        {
-            var result = await _userService.UpdateUser(id, request);
-            if (result is null)
-                return NotFound("User not found.");
-
-            return Ok(result);
-        }
-
-        [HttpDelete("{id}"), Authorize(Roles = "admin")]
-        public async Task<ActionResult<List<User>>> DeleteUser(int id)
-        {
-            var result = await _userService.DeleteUser(id);
-            if (result is null)
-                return NotFound("User not found.");
-
-            return Ok(result);
-        }
-
         [HttpGet, Authorize]
         public async Task<ActionResult<UserInfoDto>> GetMyInfo()
         {
             var result = await _userService.GetMyInfo();
             if (result is null)
-                return NotFound("User not found.");
+                return NotFound("Пользователь не найден!");
             return Ok(result);
         }
         [HttpPost("update-myinfo"), Authorize]
@@ -67,7 +31,7 @@ namespace API.Controllers
         {
             var result = await _userService.UpdateUserInfo(request);
             if (result is null)
-                return NotFound("User not found.");
+                return NotFound("Пользователь не найден!");
             return Ok(result);
         }
 
@@ -77,7 +41,7 @@ namespace API.Controllers
         {
             var result = await _userService.GetAllManagers();
             if (result is null)
-                return NotFound("Something gone wrong");
+                return NotFound("Что-то пошло не так!");
             return Ok(result);
         }
         [HttpPost("add-new-manager"), Authorize(Roles = "admin")]
@@ -85,7 +49,7 @@ namespace API.Controllers
         {
             var result = await _userService.AddNewManager(request);
             if (result is null)
-                return NotFound("Something gone wrong");
+                return NotFound("Что-то пошло не так!");
             return Ok(result);
         }
         [HttpPost("update-manager"), Authorize(Roles = "admin")]
@@ -93,7 +57,7 @@ namespace API.Controllers
         {
             var result = await _userService.UpdateManager(request);
             if (result is null)
-                return NotFound("Something gone wrong");
+                return NotFound("Что-то пошло не так!");
             return Ok(result);
         }
         [HttpDelete("delete-manager"), Authorize(Roles = "admin")]
@@ -101,7 +65,7 @@ namespace API.Controllers
         {
             var result = await _userService.DeleteManager(request);
             if (result is null)
-                return NotFound("Something gone wrong");
+                return NotFound("Что-то пошло не так!");
             return Ok(result);
         }
     }

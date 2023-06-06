@@ -103,11 +103,11 @@ namespace API.Services.CompService
             var anotherCompany = (await _context.Companies.FirstOrDefaultAsync(c => c.Name == companyDto.CompanyName))!;
 
             if (company is null)
-                return "Company not found";
+                return "Компания не найдена!";
 
             if (anotherCompany.Id != company.Id)
             {
-                return "Company name used";
+                return "Такое название уже используется!";
             }
 
             company.Name = companyDto.CompanyName;
@@ -117,14 +117,14 @@ namespace API.Services.CompService
 
             await _context.SaveChangesAsync();
 
-            return "Success";
+            return "Выполнено!";
         }
         public async Task<string> AddNewCompany(CompanyDto companyDto)
         {
             var company = (await _context.Companies.FirstOrDefaultAsync(c => c.Name == companyDto.CompanyName))!;
             if(company != null )
             {
-                return "Company name used";
+                return "Компания не найдена!";
             }
 
             Company newComp = new Company();
@@ -135,16 +135,16 @@ namespace API.Services.CompService
 
             _context.Companies.Add(newComp);
             await _context.SaveChangesAsync();
-            return "Success";
+            return "Выполнено!";
         }
         public async Task<string> DeleteCompany(int id)
         {
             var company = (await _context.Companies.FirstOrDefaultAsync(c => c.Id == id))!;
             if (company is null)
-                return "Company not found";
+                return "Компания не найдена!";
             _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
-            return "Success";
+            return "Выполнено!";
         }
         public async Task<CompanyDto> GetCompanyByName(string name)
         {
@@ -246,7 +246,7 @@ namespace API.Services.CompService
             await _context.CompanyServices.AddAsync(companyService);
             await _context.SaveChangesAsync();
 
-            return "Service added successfully.";
+            return "Услуга успешно добавлена!";
         }
         public async Task<string> UpdateService(ServiceDto serviceDto)
         {
@@ -277,7 +277,7 @@ namespace API.Services.CompService
 
             await _context.SaveChangesAsync();
 
-            return "Service updated successfully.";
+            return "Услуга успешно обновлена!";
         }
         public async Task<string> DeleteService(string companyName, string serviceName)
         {
@@ -299,7 +299,7 @@ namespace API.Services.CompService
             _context.CompanyServices.Remove(companyService);
             await _context.SaveChangesAsync();
 
-            return "Service deleted successfully.";
+            return "Услуга успешно удалена!";
         }
     }
 }

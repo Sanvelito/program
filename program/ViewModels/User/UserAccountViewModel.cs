@@ -88,7 +88,6 @@ namespace program.ViewModels.User
                     await App.Current.MainPage.DisplayAlert("Упс!", "Одно из полей введено некоректно", "OK");
                     return false;
                 }
-                await App.Current.MainPage.DisplayAlert("Готово!", $"{FirstName}, {LastName}, {PhoneNumber}", "OK");
                 var response = await _ApiService.UpdateUserInfo(new UserInfoDto
                 {
                     Username = "user",

@@ -92,9 +92,6 @@ namespace API.Services.CustService
             _context.CustomerServices.Add(customerService);
             await _context.SaveChangesAsync();
 
-            // Обновляем Id у объекта dto
-            //dto.Id = customerService.Id;
-
             return dto;
         }
         public async Task<List<CustomerServiceDto>> GetUserOrders()
@@ -182,7 +179,7 @@ namespace API.Services.CustService
 
             await _context.SaveChangesAsync();
 
-            return "success";
+            return "Выполнено!";
         }
 
     }

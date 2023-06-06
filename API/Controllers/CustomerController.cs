@@ -25,13 +25,6 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<List<CustomerServiceDto>>> GetAllOrders()
-        //{
-        //    var result = await _CustomerService.GetCustomerOrders();
-        //    return Ok(result);
-        //}
-
         [HttpPost]
         [Authorize (Roles = "user")]
         public async Task<ActionResult<CustomerServiceDto>> AddCustomerService(CustomerServiceDto dto)
@@ -53,7 +46,7 @@ namespace API.Controllers
         {
             var result = await _CustomerService.GetCompanyOrders(name);
             if(result == null)
-                return BadRequest("Something gone wrong");
+                return BadRequest("Что-то пошло не так!");
             return Ok(result);
         }
         [HttpPost("update-order")]

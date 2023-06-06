@@ -61,8 +61,6 @@ namespace program.ViewModels
                 await SecureStorage.SetAsync("refresh_token", response.refreshToken);
                 await SecureStorage.SetAsync("hasAuth", "true");
 
-
-                await App.Current.MainPage.DisplayAlert("Alert", "Вход", "OK");
                 if(response.role == "admin")
                 {
                     await Shell.Current.GoToAsync($"///{nameof(AdminMainPage)}");
@@ -83,8 +81,7 @@ namespace program.ViewModels
             }
             catch (Exception ex)
             {
-                //await App.Current.MainPage.DisplayAlert("Упс!", "Логин или Пароль не верны", "OK");
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Упс!", "Логин или Пароль не верны", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
                 return false;

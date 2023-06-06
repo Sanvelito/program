@@ -94,7 +94,11 @@ namespace program.ViewModels.Manager
                     Description = Description,
                     Price = Price
                 });
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                if(info == string.Empty)
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Категория не найдена", "OK");
+                    return true;
+                }
                 return true;
             }
             catch (Exception ex)
@@ -135,7 +139,7 @@ namespace program.ViewModels.Manager
                 UpdateButtonVisible = false;
                 DeleteButtonVisible = false;
 
-                return "new service";
+                return "Новая услуга";
             }
             else
             {

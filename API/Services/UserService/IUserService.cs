@@ -14,12 +14,6 @@ namespace API.Services.UserService
         Task<LoginDto> CheckAuth(string refreshTokenInSecure);
 
 
-        Task<List<User>> GetAllUsers();
-        Task<User> GetSingleUser(int id);
-        Task<List<User>> UpdateUser(int id,UserDto user);
-        Task<List<User>> DeleteUser(int id);
-
-
         Task<List<UserInfoDto>> GetAllManagers();
         Task<string> AddNewManager(UserInfoDto dto);
         Task<string> DeleteManager(UserInfoDto dto);

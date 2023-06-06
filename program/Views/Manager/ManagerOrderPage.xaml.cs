@@ -28,5 +28,6 @@ public partial class ManagerOrderPage : ContentPage
     void Clear(object sender, EventArgs args)
     {
         listview.SelectedItem = null;
+        _viewModel.RefreshSelected();
     }
 }

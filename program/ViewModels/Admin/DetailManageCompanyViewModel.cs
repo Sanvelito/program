@@ -83,6 +83,11 @@ namespace program.ViewModels.Admin
         {
             try
             {
+                if (string.IsNullOrEmpty(CompanyName) || string.IsNullOrEmpty(CompanyEmail))
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
+                    return false;
+                }
                 string numberString = CompanyPhoneNumber.ToString();
                 if (numberString.Length != 12)
                 {
@@ -92,11 +97,6 @@ namespace program.ViewModels.Admin
                 if (IsValidEmail(CompanyEmail) == false)
                 {
                     await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен email!", "OK");
-                    return false;
-                }
-                if (string.IsNullOrEmpty(CompanyName) || string.IsNullOrEmpty(CompanyEmail))
-                {
-                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 var newCompanyInfo = await _apiService.UpdateCompany(new CompanyDto
@@ -122,6 +122,11 @@ namespace program.ViewModels.Admin
         {
             try
             {
+                if (string.IsNullOrEmpty(CompanyName) || string.IsNullOrEmpty(CompanyEmail))
+                {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
+                    return false;
+                }
                 string numberString = CompanyPhoneNumber.ToString();
                 if (numberString.Length != 12)
                 {
@@ -131,11 +136,6 @@ namespace program.ViewModels.Admin
                 if(IsValidEmail(CompanyEmail) == false)
                 {
                     await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введен email!", "OK");
-                    return false;
-                }
-                if (string.IsNullOrEmpty(CompanyName) || string.IsNullOrEmpty(CompanyEmail))
-                {
-                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 var info = await _apiService.AddNewCompany(new CompanyDto
@@ -185,7 +185,7 @@ namespace program.ViewModels.Admin
                 UpdateButtonVisible = false;
                 DeleteButtonVisible = false;
 
-                return "new company";
+                return "Новая компания";
             }
             else
             {

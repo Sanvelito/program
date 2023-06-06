@@ -3,10 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="program.Views.User.MainPage"
              Title="Главная">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Image Source="hs2.png"/>
+            <Label Text="Добро пожаловать!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+            
+            
+            
+        </StackLayout>
+        <Border Padding="5" Margin="5">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <StackLayout>
+                <Label Text="Важно!" FontSize="16" FontAttributes="Bold"/>
+                <Label Text="Стоимость услуг может отличаться от указанной. Оплата по факту оказания услуги." FontSize="16"/>
+            </StackLayout>
+        </Border>
+    </StackLayout>
 </ContentPage>

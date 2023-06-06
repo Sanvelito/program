@@ -184,43 +184,6 @@ namespace API.Services.UserService
         }
         #region UserController
 
-        public async Task<List<User>> GetAllUsers()
-        {
-            var user = await _context.Users.ToListAsync();
-            return user;
-        }
-        public async Task<User> GetSingleUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user is null)
-                return null;
-            return user;
-        }
-        public async Task<List<User>> UpdateUser(int id, UserDto request)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user is null)
-                return null;
-            user.Username = request.Username;
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-            user.PasswordSalt = passwordSalt;
-            user.PasswordHash = passwordHash;
-            user.Role = "user";
-
-            await _context.SaveChangesAsync();
-            return await _context.Users.ToListAsync();
-
-        }
-        public async Task<List<User>> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user is null)
-                return null;
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return await _context.Users.ToListAsync();
-        }
-
         public async Task<string> UpdateUserInfo(UserInfoDto request)
         {
             var Username = string.Empty;

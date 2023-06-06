@@ -72,10 +72,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Принять" Command="{Binding AcceptOrderCommand}"/>
-        <Button Text="Отказаться" Command="{Binding DeclineOrderCommand}"/>
-        <Button Text="Выполнен" Command ="{Binding CompliteOrderCommand}" />
-        <Button Text="Clear" Clicked="Clear" />
+        <Button Text="Принять" Command="{Binding AcceptOrderCommand}" Margin="10,2,10,2"/>
+        <Button Text="Отказаться" Command="{Binding DeclineOrderCommand}" Margin="10,0,10,2"/>
+        <Button Text="Выполнен" Command ="{Binding CompliteOrderCommand}" Margin="10,0,10,2"/>
+        <Button Text="Очистить выбор" Clicked="Clear" Margin="10,0,10,0"/>
 
     </StackLayout>
 </ContentPage>

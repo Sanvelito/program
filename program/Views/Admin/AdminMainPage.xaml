@@ -4,7 +4,11 @@
              x:Class="program.Views.Admin.AdminMainPage"
              Title="Главная">
     <StackLayout>
-        <Label Text="Добро пожаловать Администратор!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
-        <Button Text="Выйти" Command="{Binding LogoutCommand}" Margin="10" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Image Source="hs2.png"/>
+            <Label Text="Добро пожаловать Администратор!" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+        
+        <Button Text="Выйти" Command="{Binding LogoutCommand}" Margin="10" HorizontalOptions="Center"/>
     </StackLayout>
 </ContentPage>

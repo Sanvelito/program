@@ -14,8 +14,6 @@ public partial class AppShell : Shell
         //log-reg
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
-        Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
-        Routing.RegisterRoute(nameof(UserPage), typeof(UserPage));
 
         //user
         Routing.RegisterRoute(nameof(UserAccountPage), typeof(UserAccountPage));
