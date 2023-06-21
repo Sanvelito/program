@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="API.Controllers.CompanyController">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAQAAAAAAAAAAAIAAQAAEAUEAAEAAABAA=</HashCode>
+      <FileName>Controllers\CompanyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Controllers.UserController" Collapsed="true">
+    <Position X="4.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQBAAAAAAAAAAABBAQAAAAAAAAAAEEAAAAAAA=</HashCode>
+      <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Data.DataContext" Collapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAACAAAQAAACAAAAAAAAAAAAAhAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Data\DataContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.InitialCreate" Collapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230429213523_InitialCreate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.InitialCreate2" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230430223926_InitialCreate2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.InitialCreate3" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230501171720_InitialCreate3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.Migration1" Collapsed="true">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230515205538_Migration1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.Migration2" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230516144053_Migration2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.InitialCreate4" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230516144809_InitialCreate4.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.InitialCreate5" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230516150607_InitialCreate5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.Migration3" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230521170332_Migration3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.Migration4" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230522013143_Migration4.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.migration5" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230530201252_migration5.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.migration6" Collapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20230530220653_migration6.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Migrations.DataContextModelSnapshot" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\DataContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.CompanyDto" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAQAAAAAAIAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\CompanyDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.CompanyServiceDto" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\CompanyServiceDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.CustomerServiceDto" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQEAFAAAgAAAAAQAAQAAAAAAAAAACAgAAAAAABAg=</HashCode>
+      <FileName>Models\Dto\CustomerServiceDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.LoginDto" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\Dto\LoginDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.RegisterDto" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAQAAQAAAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Dto\RegisterDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.ServiceDto" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABAE=</HashCode>
+      <FileName>Models\Dto\ServiceDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.UserDto" Collapsed="true">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dto\UserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Dto.UserInfoDto" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAEQAAQAAAAAAABAACAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Dto\UserInfoDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Company" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAQAQAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.CompanyService" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAQIAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\CompanyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.CustomerService" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADQAAFAAAggCAAAAAAAAgAAAAAAAACAgAAAAAAAAA=</HashCode>
+      <FileName>Models\CustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.RefreshToken" Collapsed="true">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAABAAA=</HashCode>
+      <FileName>Models\RefreshToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Service" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAkAAAAAAACAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.ServiceGroup" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ServiceGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.User" Collapsed="true">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACCAEAAQAAAAAAAEQAAQEAAAAAABAAAAAAAAAAgAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Services.CustService.CustService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAABAAFAAAAAgEAAAgAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CustService\CustService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="API.Services.UserService.UserService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAMQRBAABAAAAAAIBBAQAAABAAAAAAEQAACAAAA=</HashCode>
+      <FileName>Services\UserService\UserService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="API.Services.CompService.ICompanyService" Collapsed="true">
+    <Position X="2.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAQAAAAAAAAAAAAAAQAAEAUEAAEAAABAA=</HashCode>
+      <FileName>Services\CompanyService\ICompanyService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="API.Services.CustService.ICustomerService" Collapsed="true">
+    <Position X="4.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAEAAAAAgEAAAgAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CustService\ICustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="API.Services.UserService.IUserService" Collapsed="true">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQRAAABAAAAAAABBAQAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Services\UserService\IUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

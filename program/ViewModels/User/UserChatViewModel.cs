@@ -35,7 +35,7 @@ namespace program.ViewModels.User
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }

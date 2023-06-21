@@ -43,7 +43,7 @@ namespace program.ViewModels.Manager
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -71,14 +71,14 @@ namespace program.ViewModels.Manager
                 });
         
     
-                await App.Current.MainPage.DisplayAlert("Alert", $"Выполнено!", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", $"Заказ принят в работу!", "OK");
                 RefreshSelected();
                 Refresh();
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"Выберете заказ!", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"Выберете заказ!", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -106,14 +106,14 @@ namespace program.ViewModels.Manager
                 });
 
 
-                await App.Current.MainPage.DisplayAlert("Alert", $"Выполнено!", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", $"Заказ отклонен!", "OK");
                 RefreshSelected();
                 Refresh();
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"Выберете заказ!", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"Выберете заказ!", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -142,14 +142,14 @@ namespace program.ViewModels.Manager
                 });
 
 
-                await App.Current.MainPage.DisplayAlert("Alert", $"Выполнено!", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", $"Заказ помечен выполненым!", "OK");
                 RefreshSelected();
                 Refresh();
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"Выберете заказ!", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"Выберете заказ!", "OK");
                 Console.WriteLine(ex);
                 return false;
             }

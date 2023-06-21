@@ -107,12 +107,12 @@ namespace program.ViewModels.Admin
                     CompanyPhoneNumber = CompanyPhoneNumber,
                     CompanyImage = NewImage
                 }) ;
-                await App.Current.MainPage.DisplayAlert("Alert", $"{newCompanyInfo}", "OK");
+                await App.Current.MainPage.DisplayAlert("Внимание!", $"{newCompanyInfo}", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -145,12 +145,13 @@ namespace program.ViewModels.Admin
                     CompanyPhoneNumber = CompanyPhoneNumber,
                     CompanyImage = NewImage
                 });
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await Shell.Current.GoToAsync("..");
+                await App.Current.MainPage.DisplayAlert("Внимание!", $"{info}", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -161,12 +162,13 @@ namespace program.ViewModels.Admin
             try
             {
                 var info = await _apiService.DeleteCompany(CompanyDto.Id);
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await Shell.Current.GoToAsync("..");
+                await App.Current.MainPage.DisplayAlert("Внимание!", $"{info}", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }

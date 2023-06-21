@@ -32,11 +32,11 @@ public static class MauiProgram
 
         builder.Services
     .AddRefitClient<IApiAuthService>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://10.0.2.2:5269"));
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://10.0.2.2:5000"));
 
         builder.Services
     .AddRefitClient<IApiService>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://10.0.2.2:5269"))
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://10.0.2.2:5000"))
     .AddHttpMessageHandler<AuthHeaderHandler>();
 
         builder.Services.AddSingleton<IConnectivity>((e) => Connectivity.Current);

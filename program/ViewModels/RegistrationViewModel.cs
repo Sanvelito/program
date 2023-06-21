@@ -46,18 +46,22 @@ namespace program.ViewModels
             {
                 if (string.IsNullOrEmpty(this.Username))
                 {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 if (string.IsNullOrEmpty(this.Password))
                 {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 if (string.IsNullOrEmpty(this.FirstName))
                 {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 if (string.IsNullOrEmpty(this.LastName))
                 {
+                    await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                     return false;
                 }
                 string numberString = PhoneNumber.ToString();
@@ -86,12 +90,18 @@ namespace program.ViewModels
                     LastName = this.LastName,
                     PhoneNumber = this.PhoneNumber
                 });
-                await App.Current.MainPage.DisplayAlert("Alert", $"success", "OK");
+                await Shell.Current.GoToAsync("..");
+                Username = string.Empty;
+                Password = string.Empty;
+                FirstName = string.Empty;
+                LastName = string.Empty;
+                PhoneNumber = 0;
+                await App.Current.MainPage.DisplayAlert("Готово", $"Учетная запись создана!", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Упс!", $"Неверно введены данные!", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
                 return false;

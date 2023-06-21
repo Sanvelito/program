@@ -104,7 +104,7 @@ namespace program.ViewModels.User
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -138,12 +138,12 @@ namespace program.ViewModels.User
                     Status = "Ожидание ответа исполнителя"
                 });
                 await Shell.Current.GoToAsync("../..");
-                await App.Current.MainPage.DisplayAlert("Yes!", "Заказ составлен", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", "Заказ составлен", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
                 return false;

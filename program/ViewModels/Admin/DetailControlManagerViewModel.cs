@@ -98,13 +98,12 @@ namespace program.ViewModels.Admin
                     Manager = Manager
 
                 });
-                await Shell.Current.GoToAsync("..");
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", "Данные менеджера обновлены!", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Внимание!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -145,12 +144,12 @@ namespace program.ViewModels.Admin
                     Manager = Manager
                 });
                 await Shell.Current.GoToAsync("..");
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", "Новый менеджер создан!", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Внимание!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -162,12 +161,12 @@ namespace program.ViewModels.Admin
             {
                 var info = await _apiService.DeleteManager(new UserInfoDto { Username = UserInfoDto.Username});
                 await Shell.Current.GoToAsync("..");
-                await App.Current.MainPage.DisplayAlert("Alert", $"{info}", "OK");
+                await App.Current.MainPage.DisplayAlert("Готово!", $"Менеджер удален!", "OK");
                 return true;
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Внимание!", $"{ex}", "OK");
                 Console.WriteLine(ex);
                 return false;
             }
@@ -222,7 +221,7 @@ namespace program.ViewModels.Admin
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
             }

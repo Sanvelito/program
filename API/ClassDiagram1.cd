@@ -1,2 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="API.Models.Company">
+    <Position X="6.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAQAQAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.CompanyService">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAQIAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\CompanyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.CustomerService">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADQAAFAAAggCAAAAAAAAgAAAAAAAACAgAAAAAAAAA=</HashCode>
+      <FileName>Models\CustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.RefreshToken">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAABAAA=</HashCode>
+      <FileName>Models\RefreshToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.Service">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAkAAAAAAACAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.ServiceGroup">
+    <Position X="6.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ServiceGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Models.User">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACCAEAAQAAAAAAAEQAAQEAAAAAABAAAAAAAAAAgAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Services.CustService.CustService" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAABAAFAAAAAgEAAAgAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CustService\CustService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="API.Services.UserService.UserService" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAMQRBAABAAAAAAIBBAQAAABAAAAAAEQAACAAAA=</HashCode>
+      <FileName>Services\UserService\UserService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="API.Services.CompService.CompService">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAARAAAAAAAAAAAAAAQAAEAUEAAEAAABAA=</HashCode>
+      <FileName>Services\CompanyService\CompService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="API.Services.CompService.ICompanyService">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAQAAAAAAAAAAAAAAQAAEAUEAAEAAABAA=</HashCode>
+      <FileName>Services\CompanyService\ICompanyService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="API.Services.CustService.ICustomerService">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAEAAAAAgEAAAgAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CustService\ICustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="API.Services.UserService.IUserService">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQRAAABAAAAAAABBAQAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Services\UserService\IUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

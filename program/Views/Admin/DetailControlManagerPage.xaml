@@ -19,12 +19,12 @@
     </ContentPage.Resources>
     <VerticalStackLayout Margin="20">
 
-        <Label Text="Username" FontSize="Body" FontAttributes="Bold"/>
+        <Label Text="Логин" FontSize="Body" FontAttributes="Bold"/>
         <Border Padding="2" >
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
-            <Entry Placeholder="Username" Text="{Binding Username}" Margin="5,0,0,0" FontSize="16" IsEnabled="{Binding EntryIsEnabled}"/>
+            <Entry Placeholder="Логин" Text="{Binding Username}" Margin="5,0,0,0" FontSize="16" IsEnabled="{Binding EntryIsEnabled}"/>
         </Border>
         <Label Text="Пароль" FontSize="Body" FontAttributes="Bold" IsVisible="{Binding PasswordEntryVisable}"/>
         <Border Padding="2" IsVisible="{Binding PasswordEntryVisable}">
@@ -43,19 +43,19 @@
                 </Entry.Behaviors>
             </Entry>
         </Border>
-        <Label Text="FirstName" FontSize="Body" FontAttributes="Bold"/>
+        <Label Text="Имя" FontSize="Body" FontAttributes="Bold"/>
         <Border Padding="2" >
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
-            <Entry Placeholder="FirstName" Text="{Binding FirstName}" Margin="5,0,0,0" FontSize="16"/>
+            <Entry Placeholder="Имя" Text="{Binding FirstName}" Margin="5,0,0,0" FontSize="16"/>
         </Border>
-        <Label Text="LastName" FontSize="Body" FontAttributes="Bold"/>
+        <Label Text="Фамилия" FontSize="Body" FontAttributes="Bold"/>
         <Border Padding="2" >
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
-            <Entry Placeholder="LastName" Text="{Binding LastName}" Margin="5,0,0,0" FontSize="16"/>
+            <Entry Placeholder="Фамилия" Text="{Binding LastName}" Margin="5,0,0,0" FontSize="16"/>
         </Border>
         <Label Text="Номер телефона" FontSize="Body" FontAttributes="Bold"/>
         <Border Padding="2" >
@@ -73,7 +73,7 @@
                 </Entry.Behaviors>
             </Entry>
         </Border>
-        <Label Text="Status" FontSize="Body" FontAttributes="Bold"/>
+        <Label Text="Статус" FontSize="Body" FontAttributes="Bold"/>
         <Border Padding="2" >
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />

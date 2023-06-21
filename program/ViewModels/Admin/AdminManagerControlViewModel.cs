@@ -38,7 +38,7 @@ namespace program.ViewModels.Admin
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", $"{ex}", "OK");
+                await App.Current.MainPage.DisplayAlert("Ошибка!", $"{ex}", "OK");
                 // Обработка ошибки авторизации
                 Console.WriteLine(ex);
             }
